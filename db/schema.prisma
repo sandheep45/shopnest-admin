@@ -32,10 +32,11 @@ model Media {
   type Mediatype
   url  String
 
-  Product Product[]
-
-  Variant   Variant? @relation(fields: [variantId], references: [id], onDelete: Cascade)
   variantId String?  @db.ObjectId
+  Variant   Variant? @relation(fields: [variantId], references: [id], onDelete: Cascade)
+
+  Product  Product[]
+  Category Category[]
 }
 
 model Product {
@@ -114,7 +115,15 @@ model CustomerReview {
 }
 
 model Category {
-  id       String     @id @default(auto()) @map("_id") @db.ObjectId
+  id          String @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  description String
+  status      Status
+  tags        String
+
+  mediaId String @db.ObjectId
+  Media   Media  @relation(fields: [mediaId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
   Metadata MetaData[]
   Product  Product[]
 }
@@ -128,7 +137,7 @@ model User {
   name           String?
   email          String   @unique
   hashedPassword String?
-  role           String   @default("USER")
+  role           Role     @default(ADMIN)
 
   tokens   Token[]
   sessions Session[]
