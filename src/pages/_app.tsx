@@ -6,6 +6,7 @@ import "src/styles/globals.css"
 
 import "src/core/styles/index.css"
 import { Toaster } from "@src/core/components/Toast"
+import ThemeContextProvider from "@src/core/context/ThemeContext"
 
 function RootErrorFallback({ error }: ErrorFallbackProps) {
   if (error instanceof AuthenticationError) {
@@ -28,16 +29,18 @@ function RootErrorFallback({ error }: ErrorFallbackProps) {
 }
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const getLayout = Component.getLayout || ((page) => page)
+  const getLayout = Component.getLayout ?? ((page) => page)
   return (
-    <ErrorBoundary FallbackComponent={RootErrorFallback}>
-      {getLayout(
-        <>
-          <Component {...pageProps} />
-          <Toaster />
-        </>
-      )}
-    </ErrorBoundary>
+    <ThemeContextProvider>
+      <ErrorBoundary FallbackComponent={RootErrorFallback}>
+        {getLayout(
+          <>
+            <Component {...pageProps} />
+            <Toaster />
+          </>
+        )}
+      </ErrorBoundary>
+    </ThemeContextProvider>
   )
 }
 

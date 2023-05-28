@@ -37,18 +37,17 @@ const seed = async () => {
   const products = await db.product.findMany()
 
   for (const product of products) {
+    //add 100 customer reviews to each product
     await db.product.update({
       where: { id: product.id },
       data: {
-        Variant: {
-          create: {
-            price: parseInt(faker.commerce.price()),
-            sku: getRandomInt(1000000000, 9999999999),
-            description: faker.commerce.productDescription(),
-            inWareHouseQuantity: getRandomInt(0, 100),
-            onSelfQuantity: getRandomInt(0, 100),
-            taxPercent: getRandomInt(0, 100),
-            barcode: getRandomInt(1000000000000, 9999999999999),
+        CustometReview: {
+          createMany: {
+            data: Array.from({ length: 100 }, () => ({
+              title: faker.commerce.productName(),
+              comment: faker.commerce.productDescription(),
+              rating: getRandomInt(1, 5),
+            })),
           },
         },
       },
