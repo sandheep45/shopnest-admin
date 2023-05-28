@@ -5,7 +5,8 @@ import { withBlitz } from "src/blitz-client"
 import "src/styles/globals.css"
 
 import "src/core/styles/index.css"
-import { Toaster } from "@src/core/components/Toast"
+import { Toaster } from "@src/core/components/common/Toast"
+
 import ThemeContextProvider from "@src/core/context/ThemeContext"
 
 function RootErrorFallback({ error }: ErrorFallbackProps) {
