@@ -1,12 +1,12 @@
-import { ErrorFallbackProps, ErrorComponent, ErrorBoundary, AppProps } from "@blitzjs/next"
-import { AuthenticationError, AuthorizationError } from "blitz"
-import React from "react"
-import { withBlitz } from "src/blitz-client"
 import "src/styles/globals.css"
-
 import "src/core/styles/index.css"
-import { Toaster } from "@src/core/components/common/Toast"
 
+import { AuthenticationError, AuthorizationError } from "blitz"
+import React, { Suspense } from "react"
+import { withBlitz } from "src/blitz-client"
+
+import { AppProps, ErrorBoundary, ErrorComponent, ErrorFallbackProps } from "@blitzjs/next"
+import { Toaster } from "@src/core/components/common/Toast"
 import ThemeContextProvider from "@src/core/context/ThemeContext"
 
 function RootErrorFallback({ error }: ErrorFallbackProps) {
@@ -35,10 +35,10 @@ function MyApp({ Component, pageProps }: AppProps) {
     <ThemeContextProvider>
       <ErrorBoundary FallbackComponent={RootErrorFallback}>
         {getLayout(
-          <>
+          <Suspense fallback="Loading...">
             <Component {...pageProps} />
             <Toaster />
-          </>
+          </Suspense>
         )}
       </ErrorBoundary>
     </ThemeContextProvider>

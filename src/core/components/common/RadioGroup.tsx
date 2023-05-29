@@ -1,9 +1,9 @@
 "use client"
 
 import * as React from "react"
-import * as RadioGroupPrimitive from "@radix-ui/react-radio-group"
 import { BsCircle } from "react-icons/bs"
 
+import * as RadioGroupPrimitive from "@radix-ui/react-radio-group"
 import { cn } from "@src/lib/utils"
 
 const RadioGroup = React.forwardRef<

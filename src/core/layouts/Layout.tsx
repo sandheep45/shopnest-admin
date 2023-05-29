@@ -1,6 +1,8 @@
 import Head from "next/head"
-import React, { FC } from "react"
+import React from "react"
+
 import { BlitzLayout } from "@blitzjs/next"
+
 import { useThemeContext } from "../context/ThemeContext"
 
 const Layout: BlitzLayout<{ title?: string; children?: React.ReactNode }> = ({

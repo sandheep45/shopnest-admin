@@ -1,9 +1,11 @@
-import { NotFoundError, AuthenticationError } from "blitz"
-import { resolver } from "@blitzjs/rpc"
-import { SecurePassword } from "@blitzjs/auth/secure-password"
+import { AuthenticationError, NotFoundError } from "blitz"
 import db from "db"
-import { authenticateUser } from "./login"
+
+import { SecurePassword } from "@blitzjs/auth/secure-password"
+import { resolver } from "@blitzjs/rpc"
+
 import { ChangePassword } from "../schemas"
+import { authenticateUser } from "./login"
 
 export default resolver.pipe(
   resolver.zod(ChangePassword),

@@ -1,4 +1,5 @@
 import Head from "next/head"
+
 import { ErrorComponent } from "@blitzjs/next"
 
 // ------------------------------------------------------

@@ -1,7 +1,9 @@
-import { generateToken, hash256 } from "@blitzjs/auth"
-import { resolver } from "@blitzjs/rpc"
 import db from "db"
 import { forgotPasswordMailer } from "mailers/forgotPasswordMailer"
+
+import { generateToken, hash256 } from "@blitzjs/auth"
+import { resolver } from "@blitzjs/rpc"
+
 import { ForgotPassword } from "../schemas"
 
 const RESET_PASSWORD_TOKEN_EXPIRATION_IN_HOURS = 4

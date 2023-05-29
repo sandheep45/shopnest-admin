@@ -1,9 +1,9 @@
 "use client"
 
 import * as React from "react"
-import * as DialogPrimitive from "@radix-ui/react-dialog"
 import { RxCross2 } from "react-icons/rx"
 
+import * as DialogPrimitive from "@radix-ui/react-dialog"
 import { cn } from "@src/lib/utils"
 
 const Dialog = DialogPrimitive.Root

@@ -1,9 +1,10 @@
 "use client"
 
 import * as React from "react"
-import { BsChevronExpand, BsCheck2 } from "react-icons/bs"
+import { BsCheck2, BsChevronExpand } from "react-icons/bs"
 
 import { cn } from "@src/lib/utils"
+
 import { Button } from "./Button"
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from "./Command"
 import { Popover, PopoverContent, PopoverTrigger } from "./Popover"

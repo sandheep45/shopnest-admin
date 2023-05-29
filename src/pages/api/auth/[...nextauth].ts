@@ -1,9 +1,10 @@
-import { api } from "src/blitz-server"
-import GoogleProvider from "next-auth/providers/google"
-import FacebookProvider from "next-auth/providers/facebook"
-import { NextAuthAdapter } from "@blitzjs/auth/next-auth"
 import db, { User } from "db"
+import FacebookProvider from "next-auth/providers/facebook"
+import GoogleProvider from "next-auth/providers/google"
+import { api } from "src/blitz-server"
 import { Role } from "types"
+
+import { NextAuthAdapter } from "@blitzjs/auth/next-auth"
 
 // Has to be defined separately for `profile` to be correctly typed below
 const providers = [
@@ -41,7 +42,7 @@ export default api(
         userId: newUser.id,
         role: newUser.role as Role,
       })
-      return { redirectUrl: "/github" }
+      return { redirectUrl: "/" }
     },
   })
 )

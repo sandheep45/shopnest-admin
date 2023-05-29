@@ -1,10 +1,10 @@
 "use client"
 
 import * as React from "react"
-import * as SelectPrimitive from "@radix-ui/react-select"
 import { BsCheck2 } from "react-icons/bs"
 import { HiOutlineChevronDown } from "react-icons/hi"
 
+import * as SelectPrimitive from "@radix-ui/react-select"
 import { cn } from "@src/lib/utils"
 
 const Select = SelectPrimitive.Root

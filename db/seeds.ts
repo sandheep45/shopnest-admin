@@ -1,5 +1,6 @@
-import db from "./index"
 import { faker } from "@faker-js/faker"
+
+import db from "./index"
 
 /*
  * This seed function is executed when you run `blitz db seed`.
