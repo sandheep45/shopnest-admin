@@ -5,6 +5,12 @@ import { api } from "src/blitz-server"
 
 import { passportAuth } from "@blitzjs/auth"
 
+const generateBaseUrl = (suffix: string) => {
+  if (process.env.VERCEL_ENV === "preview") return `${process.env.VERCEL_URL}/${suffix}`
+  if (process.env.VERCEL_ENV === "production") return `https://shopnest-admin.vercel.app/${suffix}`
+  return `http://localhost:3000/${suffix}`
+}
+
 export default api(
   passportAuth({
     successRedirectUrl: "/",
@@ -19,10 +25,7 @@ export default api(
           {
             clientID: process.env.GOOGLE_CLIENT_ID!,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-            callbackURL:
-              process.env.NODE_ENV === "production"
-                ? "https://shopnest-admin.vercel.app/api/auth/google/callback"
-                : "http://localhost:3000/api/auth/google/callback",
+            callbackURL: generateBaseUrl("api/auth/google/callback"),
           },
           async function (_accessToken, _refreshToken, profile, done) {
             const email = profile.emails![0]?.value
@@ -48,10 +51,7 @@ export default api(
           {
             clientID: process.env.FACEBOOK_CLIENT_ID!,
             clientSecret: process.env.FACEBOOK_CLIENT_SECRET!,
-            callbackURL:
-              process.env.NODE_ENV === "production"
-                ? "https://shopnest-admin.vercel.app/api/auth/facebook/callback"
-                : "http://localhost:3000/api/auth/facebook/callback",
+            callbackURL: generateBaseUrl("api/auth/facebook/callback"),
             profileFields: ["id", "email", "name"],
           },
           async function (_accessToken, _refreshToken, profile, done) {
