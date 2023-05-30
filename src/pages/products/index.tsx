@@ -1,11 +1,12 @@
-import { Suspense } from "react"
-import { Routes } from "@blitzjs/next"
 import Head from "next/head"
 import Link from "next/link"
-import { usePaginatedQuery } from "@blitzjs/rpc"
 import { useRouter } from "next/router"
+import { Suspense } from "react"
 import Layout from "src/core/layouts/Layout"
 import getProducts from "src/products/queries/getProducts"
+
+import { Routes } from "@blitzjs/next"
+import { usePaginatedQuery } from "@blitzjs/rpc"
 
 const ITEMS_PER_PAGE = 100
 

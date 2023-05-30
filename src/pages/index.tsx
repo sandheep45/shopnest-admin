@@ -1,9 +1,16 @@
 import React from "react"
 
+import { BlitzPage } from "@blitzjs/auth"
 import Layout from "@src/core/layouts/Layout"
 
-const Index = () => {
-  return <Layout title="Dashboard">index</Layout>
+const Index: BlitzPage = () => {
+  console.log(process.env.NODE_ENV)
+  return (
+    <Layout title="Dashboard">
+      <a href="/api/auth/google">Log In With Google</a>
+      <a href="/api/auth/facebook">Log In With Facebook</a>
+    </Layout>
+  )
 }
 
 export default Index

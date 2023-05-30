@@ -1,5 +1,7 @@
-import { resolver } from "@blitzjs/rpc"
 import db from "db"
+
+import { resolver } from "@blitzjs/rpc"
+
 import { DeleteProductSchema } from "../schemas"
 
 export default resolver.pipe(

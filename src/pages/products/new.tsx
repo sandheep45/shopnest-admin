@@ -1,12 +1,13 @@
-import { Routes } from "@blitzjs/next"
 import Link from "next/link"
 import { useRouter } from "next/router"
-import { useMutation } from "@blitzjs/rpc"
-import Layout from "src/core/layouts/Layout"
-import { CreateProductSchema } from "src/products/schemas"
-import createProduct from "src/products/mutations/createProduct"
-import { ProductForm, FORM_ERROR } from "src/products/components/ProductForm"
 import { Suspense } from "react"
+import Layout from "src/core/layouts/Layout"
+import { FORM_ERROR, ProductForm } from "src/products/components/ProductForm"
+import createProduct from "src/products/mutations/createProduct"
+import { CreateProductSchema } from "src/products/schemas"
+
+import { Routes } from "@blitzjs/next"
+import { useMutation } from "@blitzjs/rpc"
 
 const NewProductPage = () => {
   const router = useRouter()

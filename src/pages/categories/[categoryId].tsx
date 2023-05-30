@@ -6,6 +6,7 @@ import deleteCategory from "src/categories/mutations/deleteCategory"
 import getCategory from "src/categories/queries/getCategory"
 import Layout from "src/core/layouts/Layout"
 
+import { BlitzPage } from "@blitzjs/auth"
 import { Routes, useParam } from "@blitzjs/next"
 import { useMutation, useQuery } from "@blitzjs/rpc"
 
@@ -44,7 +45,7 @@ export const Category = () => {
   )
 }
 
-const ShowCategoryPage = () => {
+const ShowCategoryPage: BlitzPage = () => {
   return (
     <div>
       <p>

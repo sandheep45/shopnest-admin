@@ -1,11 +1,13 @@
-import { Suspense } from "react"
-import { Routes } from "@blitzjs/next"
 import Head from "next/head"
 import Link from "next/link"
-import { usePaginatedQuery } from "@blitzjs/rpc"
 import { useRouter } from "next/router"
+import { Suspense } from "react"
 import Layout from "src/core/layouts/Layout"
 import getUsers from "src/users/queries/getUsers"
+
+import { Routes } from "@blitzjs/next"
+import { usePaginatedQuery } from "@blitzjs/rpc"
+import { Button } from "@src/core/components/common/Button"
 
 const ITEMS_PER_PAGE = 100
 
@@ -31,12 +33,12 @@ export const UsersList = () => {
         ))}
       </ul>
 
-      <button disabled={page === 0} onClick={goToPreviousPage}>
+      <Button disabled={page === 0} onClick={goToPreviousPage}>
         Previous
-      </button>
-      <button disabled={!hasMore} onClick={goToNextPage}>
+      </Button>
+      <Button disabled={!hasMore} onClick={goToNextPage}>
         Next
-      </button>
+      </Button>
     </div>
   )
 }

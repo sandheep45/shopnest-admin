@@ -1,11 +1,13 @@
-import { Suspense } from "react"
-import { Routes } from "@blitzjs/next"
 import Head from "next/head"
 import Link from "next/link"
-import { usePaginatedQuery } from "@blitzjs/rpc"
 import { useRouter } from "next/router"
-import Layout from "src/core/layouts/Layout"
+import { Suspense } from "react"
 import getCategories from "src/categories/queries/getCategories"
+import Layout from "src/core/layouts/Layout"
+
+import { BlitzPage } from "@blitzjs/auth"
+import { Routes } from "@blitzjs/next"
+import { usePaginatedQuery } from "@blitzjs/rpc"
 
 const ITEMS_PER_PAGE = 100
 
@@ -41,7 +43,7 @@ export const CategoriesList = () => {
   )
 }
 
-const CategoriesPage = () => {
+const CategoriesPage: BlitzPage = () => {
   return (
     <Layout>
       <Head>
@@ -60,5 +62,7 @@ const CategoriesPage = () => {
     </Layout>
   )
 }
+
+CategoriesPage.authenticate = true
 
 export default CategoriesPage

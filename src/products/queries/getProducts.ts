@@ -1,6 +1,7 @@
 import { paginate } from "blitz"
-import { resolver } from "@blitzjs/rpc"
 import db, { Prisma } from "db"
+
+import { resolver } from "@blitzjs/rpc"
 
 interface GetProductsInput
   extends Pick<Prisma.ProductFindManyArgs, "where" | "orderBy" | "skip" | "take"> {}
