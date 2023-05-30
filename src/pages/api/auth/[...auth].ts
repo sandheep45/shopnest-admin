@@ -21,7 +21,7 @@ export default api(
             clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
             callbackURL:
               process.env.NODE_ENV === "production"
-                ? `${process.env.VERCEL_URL}/api/auth/google/callback`
+                ? "https://shopnest-admin.vercel.app/api/auth/google/callback"
                 : "http://localhost:3000/api/auth/google/callback",
           },
           async function (_accessToken, _refreshToken, profile, done) {
@@ -50,7 +50,7 @@ export default api(
             clientSecret: process.env.FACEBOOK_CLIENT_SECRET!,
             callbackURL:
               process.env.NODE_ENV === "production"
-                ? `${process.env.VERCEL_URL}/api/auth/facebook/callback`
+                ? "https://shopnest-admin.vercel.app/api/auth/facebook/callback"
                 : "http://localhost:3000/api/auth/facebook/callback",
             profileFields: ["id", "email", "name"],
           },
