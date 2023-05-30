@@ -4,7 +4,6 @@ import { BlitzPage } from "@blitzjs/auth"
 import Layout from "@src/core/layouts/Layout"
 
 const Index: BlitzPage = () => {
-  console.log(process.env.NEXT_PUBLIC_SITE_URL)
   return (
     <Layout title="Dashboard">
       <a href="/api/auth/google">Log In With Google</a>
