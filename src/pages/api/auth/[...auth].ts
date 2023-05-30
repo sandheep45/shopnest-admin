@@ -55,6 +55,8 @@ export default api(
             profileFields: ["id", "email", "name"],
           },
           async function (_accessToken, _refreshToken, profile, done) {
+            console.log(process.env.VERCEL_URL, "normal")
+            console.log(process.env.NEXT_PUBLIC_VERCEL_URL, "next_public")
             const email = profile.emails![0]?.value
             const user = await db.user.upsert({
               where: { email },
