@@ -1,12 +1,9 @@
-import Head from "next/head"
-import Link from "next/link"
 import { useRouter } from "next/router"
 import { Suspense } from "react"
 import getCategories from "src/categories/queries/getCategories"
 import Layout from "src/core/layouts/Layout"
 
 import { BlitzPage } from "@blitzjs/auth"
-import { Routes } from "@blitzjs/next"
 import { usePaginatedQuery } from "@blitzjs/rpc"
 import CategoryTable from "@src/categories/components/CategoryTable"
 import { Button } from "@src/core/components/common/Button"

@@ -4,7 +4,6 @@ import Layout from "src/core/layouts/Layout"
 import getUsers from "src/users/queries/getUsers"
 
 import { usePaginatedQuery } from "@blitzjs/rpc"
-import { ScrollAreaViewport } from "@radix-ui/react-scroll-area"
 import { Button } from "@src/core/components/common/Button"
 import { Input } from "@src/core/components/common/Input"
 import { ScrollArea, ScrollBar } from "@src/core/components/common/ScrollArea"
