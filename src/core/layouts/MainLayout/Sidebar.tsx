@@ -52,9 +52,9 @@ const Sidebar = () => {
               href={route.path}
               key={route.name}
               className={cn(
-                "transition-all duration-100 flex items-center gap-5 px-5 py-2 rounded-md hover:bg-gray-300 dark:hover:bg-gray-800 dark:hover:text-gray-300",
-                router.asPath === route.path.pathname &&
-                  "bg-gray-200 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300 shadow-lg"
+                "transition-all duration-100 flex items-center gap-5 px-5 py-2 rounded-md hover:bg-gray-300 dark:hover:bg-gray-900 dark:hover:text-gray-300",
+                router.pathname === route.path.href &&
+                  "bg-gray-200 hover:bg-gray-200 dark:bg-gray-800 hover:dark:bg-gray-800 dark:text-gray-300 shadow-lg"
               )}
             >
               {route.icon}

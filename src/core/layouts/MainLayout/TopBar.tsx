@@ -13,7 +13,7 @@ const TopBar = () => {
   }
 
   return (
-    <header className="w-full sticky top-0 flex items-center justify-end dark:bg-[#1e1e2d] dark:text-gray-500 h-16 px-5 z-[999] transition-all duration-300">
+    <header className="w-full sticky top-0 z-10 flex items-center justify-end bg-[#f5f8fa] dark:bg-[#1e1e2d] dark:text-gray-500 py-3 px-5 transition-all duration-300">
       <Toggle onClick={toggleTheme} aria-label="toggle-theme">
         <BsCloudSunFill
           className={`transition-all duration-700 ease-in-out ${

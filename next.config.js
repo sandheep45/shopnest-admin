@@ -4,6 +4,16 @@ const { withBlitz } = require("@blitzjs/next")
 /**
  * @type {import('@blitzjs/next').BlitzConfig}
  **/
-const config = {}
+const config = {
+  images: {
+    domains: [
+      "avatars.githubusercontent.com",
+      "cloudflare-ipfs.com",
+      "loremflickr.com",
+      "picsum.photos",
+      "via.placeholder.com",
+    ],
+  },
+}
 
 module.exports = withBlitz(config)

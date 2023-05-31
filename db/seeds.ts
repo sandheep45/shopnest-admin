@@ -34,21 +34,31 @@ function getRandomValue(options: any[]): any {
   return options[randomIndex]
 }
 
-const seed = async () => {
-  const products = await db.product.findMany()
+function selectRandomMultipleUsers(userCount: number, users: any[]): any[] {
+  const randomUsers: any[] = []
 
-  for (const product of products) {
-    //add 100 customer reviews to each product
-    await db.product.update({
-      where: { id: product.id },
+  // Generate random tags
+  for (let i = 0; i < userCount; i++) {
+    const randomIndex = Math.floor(Math.random() * users.length)
+    const randomUser = users[randomIndex]
+    randomUsers.push(randomUser)
+  }
+
+  return randomUsers
+}
+
+const seed = async () => {
+  //Upadte users to have image
+  const users = await db.user.findMany()
+
+  for (const user of users) {
+    await db.user.update({
+      where: { id: user.id },
       data: {
-        CustometReview: {
-          createMany: {
-            data: Array.from({ length: 100 }, () => ({
-              title: faker.commerce.productName(),
-              comment: faker.commerce.productDescription(),
-              rating: getRandomInt(1, 5),
-            })),
+        Media: {
+          create: {
+            type: "IMAGE",
+            url: faker.image.urlLoremFlickr({ category: "people" }),
           },
         },
       },

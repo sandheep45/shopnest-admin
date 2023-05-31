@@ -31,7 +31,7 @@ export default api(
             const email = profile.emails![0]?.value
             const user = await db.user.upsert({
               where: { email },
-              create: { email: email! },
+              create: { email: email!, name: profile.displayName! },
               update: {},
             })
             done(null, {
@@ -58,7 +58,7 @@ export default api(
             const email = profile.emails![0]?.value
             const user = await db.user.upsert({
               where: { email },
-              create: { email: email! },
+              create: { email: email!, name: profile.displayName! },
               update: {},
             })
             done(null, {
