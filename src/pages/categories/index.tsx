@@ -8,8 +8,11 @@ import Layout from "src/core/layouts/Layout"
 import { BlitzPage } from "@blitzjs/auth"
 import { Routes } from "@blitzjs/next"
 import { usePaginatedQuery } from "@blitzjs/rpc"
+import CategoryTable from "@src/categories/components/CategoryTable"
+import { Button } from "@src/core/components/common/Button"
+import { ScrollArea, ScrollBar } from "@src/core/components/common/ScrollArea"
 
-const ITEMS_PER_PAGE = 100
+const ITEMS_PER_PAGE = 10
 
 export const CategoriesList = () => {
   const router = useRouter()
@@ -24,40 +27,55 @@ export const CategoriesList = () => {
   const goToNextPage = () => router.push({ query: { page: page + 1 } })
 
   return (
-    <div>
-      <ul>
-        {categories.map((category) => (
-          <li key={category.id}>
-            <Link href={Routes.ShowCategoryPage({ categoryId: category.id })}>{category.name}</Link>
-          </li>
-        ))}
-      </ul>
+    <div className="flex flex-col gap-8 w-full">
+      <ScrollArea className="h-[calc(100vh-220px)] w-full overflow-x-auto">
+        <CategoryTable categories={categories} />
+        <ScrollBar orientation="horizontal" />
+      </ScrollArea>
 
-      <button disabled={page === 0} onClick={goToPreviousPage}>
-        Previous
-      </button>
-      <button disabled={!hasMore} onClick={goToNextPage}>
-        Next
-      </button>
+      <div className="flex items-center justify-between">
+        <Button disabled={page === 0} onClick={goToPreviousPage}>
+          Previous
+        </Button>
+        <Button disabled={!hasMore} onClick={goToNextPage}>
+          Next
+        </Button>
+      </div>
     </div>
   )
 }
 
 const CategoriesPage: BlitzPage = () => {
   return (
-    <Layout>
-      <Head>
-        <title>Categories</title>
-      </Head>
+    <Layout title="Categories List">
+      <div className="flex flex-col gap-5 w-full">
+        <h1 className="text-xl font-semibold text-gray-800 dark:text-gray-200 px-2">
+          Category Listing
+        </h1>
+        <div className="w-full flex flex-col gap-7 p-5 dark:bg-[#1e1e2d] bg-[#f5f8fa] rounded-md">
+          {/* <div className="flex items-center justify-between">
+            <Input className="w-auto" placeholder="Search" />
 
-      <div>
-        <p>
-          <Link href={Routes.NewCategoryPage()}>Create Category</Link>
-        </p>
+            <div className="flex gap-3">
+              <Select>
+                <SelectTrigger className="w-[180px]">
+                  <SelectValue placeholder="Theme" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="light">Light</SelectItem>
+                  <SelectItem value="dark">Dark</SelectItem>
+                  <SelectItem value="system">System</SelectItem>
+                </SelectContent>
+              </Select>
+              <Button>Filter</Button>
+              <Button>Export</Button>
+            </div>
+          </div> */}
 
-        <Suspense fallback={<div>Loading...</div>}>
-          <CategoriesList />
-        </Suspense>
+          <Suspense fallback={<>Loading...</>}>
+            <CategoriesList />
+          </Suspense>
+        </div>
       </div>
     </Layout>
   )

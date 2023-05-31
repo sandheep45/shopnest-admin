@@ -19,7 +19,8 @@ export default resolver.pipe(
       skip,
       take,
       count: () => db.category.count({ where }),
-      query: (paginateArgs) => db.category.findMany({ ...paginateArgs, where, orderBy }),
+      query: (paginateArgs) =>
+        db.category.findMany({ ...paginateArgs, where, orderBy, include: { Media: true } }),
     })
 
     return {

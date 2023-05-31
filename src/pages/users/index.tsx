@@ -4,9 +4,10 @@ import Layout from "src/core/layouts/Layout"
 import getUsers from "src/users/queries/getUsers"
 
 import { usePaginatedQuery } from "@blitzjs/rpc"
+import { ScrollAreaViewport } from "@radix-ui/react-scroll-area"
 import { Button } from "@src/core/components/common/Button"
 import { Input } from "@src/core/components/common/Input"
-import { ScrollArea } from "@src/core/components/common/ScrollArea"
+import { ScrollArea, ScrollBar } from "@src/core/components/common/ScrollArea"
 import {
   Select,
   SelectContent,
@@ -32,8 +33,9 @@ export const UsersList = () => {
 
   return (
     <div className="flex flex-col gap-8 w-full">
-      <ScrollArea className="h-[calc(100vh-220px)] w-full">
+      <ScrollArea className="h-[calc(100vh-220px)] w-full overflow-x-auto">
         <UserTable users={users} />
+        <ScrollBar orientation="horizontal" />
       </ScrollArea>
 
       <div className="flex items-center justify-between">
@@ -56,7 +58,7 @@ const UsersPage = () => {
           User Listing
         </h1>
         <div className="w-full flex flex-col gap-7 p-5 dark:bg-[#1e1e2d] bg-[#f5f8fa] rounded-md">
-          <div className="flex items-center justify-between">
+          {/* <div className="flex items-center justify-between">
             <Input className="w-auto" placeholder="Search" />
 
             <div className="flex gap-3">
@@ -73,9 +75,9 @@ const UsersPage = () => {
               <Button>Filter</Button>
               <Button>Export</Button>
             </div>
-          </div>
+          </div> */}
 
-          <Suspense fallback={<div>Loading 1234...</div>}>
+          <Suspense fallback={<>Loading...</>}>
             <UsersList />
           </Suspense>
         </div>
