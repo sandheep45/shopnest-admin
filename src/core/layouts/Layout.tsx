@@ -24,7 +24,7 @@ const Layout: BlitzLayout<{ title?: string; children?: React.ReactNode }> = ({
           <Sidebar />
           <div className="flex-1 flex flex-col h-screen overflow-y-hidden">
             <TopBar />
-            <div className="flex flex-1 px-5 h-[calc(100vh-64px)] overflow-y-auto bg-gray-200 dark:bg-[#151521]">
+            <div className="flex flex-1 p-5 overflow-y-auto bg-gray-200 dark:bg-[#151521]">
               {children}
             </div>
           </div>

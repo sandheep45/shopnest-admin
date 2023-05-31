@@ -8,6 +8,7 @@ import getUsers from "src/users/queries/getUsers"
 import { Routes } from "@blitzjs/next"
 import { usePaginatedQuery } from "@blitzjs/rpc"
 import { Button } from "@src/core/components/common/Button"
+import { ScrollArea } from "@src/core/components/common/ScrollArea"
 
 const ITEMS_PER_PAGE = 100
 
@@ -24,21 +25,25 @@ export const UsersList = () => {
   const goToNextPage = () => router.push({ query: { page: page + 1 } })
 
   return (
-    <div className="p-3">
-      <ul className="h-full overflow-y-auto">
-        {users.map((user) => (
-          <li key={user.id}>
-            <Link href={Routes.ShowUserPage({ userId: user.id })}>{user.name}</Link>
-          </li>
-        ))}
-      </ul>
+    <div className="flex flex-col gap-4 w-full">
+      <ScrollArea className="h-[calc(100vh-220px)] w-full">
+        <ul className="h-full overflow-y-auto">
+          {users.map((user) => (
+            <li key={user.id}>
+              <Link href={Routes.ShowUserPage({ userId: user.id })}>{user.name}</Link>
+            </li>
+          ))}
+        </ul>
+      </ScrollArea>
 
-      <Button disabled={page === 0} onClick={goToPreviousPage}>
-        Previous
-      </Button>
-      <Button disabled={!hasMore} onClick={goToNextPage}>
-        Next
-      </Button>
+      <div className="flex items-center justify-between">
+        <Button disabled={page === 0} onClick={goToPreviousPage}>
+          Previous
+        </Button>
+        <Button disabled={!hasMore} onClick={goToNextPage}>
+          Next
+        </Button>
+      </div>
     </div>
   )
 }
@@ -50,7 +55,7 @@ const UsersPage = () => {
         <title>Users</title>
       </Head>
 
-      <div className="p-5">
+      <div className="w-full p-5 dark:bg-[#1e1e2d] bg-[#f5f8fa] rounded-md">
         <p>
           <Link href={Routes.NewUserPage()}>Create User</Link>
         </p>
