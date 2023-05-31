@@ -24,8 +24,8 @@ export const UsersList = () => {
   const goToNextPage = () => router.push({ query: { page: page + 1 } })
 
   return (
-    <div>
-      <ul>
+    <div className="p-3">
+      <ul className="h-full overflow-y-auto">
         {users.map((user) => (
           <li key={user.id}>
             <Link href={Routes.ShowUserPage({ userId: user.id })}>{user.name}</Link>
@@ -50,7 +50,7 @@ const UsersPage = () => {
         <title>Users</title>
       </Head>
 
-      <div>
+      <div className="p-5">
         <p>
           <Link href={Routes.NewUserPage()}>Create User</Link>
         </p>

@@ -6,6 +6,7 @@ import { MdAssignmentAdd, MdCategory, MdSpaceDashboard } from "react-icons/md"
 import { RiAdminFill } from "react-icons/ri"
 
 import { Routes } from "@blitzjs/next"
+import { cn } from "@src/lib/utils"
 
 const routes = [
   {
@@ -15,7 +16,7 @@ const routes = [
   },
   {
     name: "Users",
-    path: "/users",
+    path: Routes.UsersPage(),
     icon: <RiAdminFill />,
   },
   {
@@ -43,20 +44,26 @@ const routes = [
 const Sidebar = () => {
   const router = useRouter()
   return (
-    <div className="flex flex-col gap-5 p-5 w-64">
-      {routes.map((route, index) => {
-        return (
-          <Link
-            href={route.path}
-            key={route.name}
-            className="flex items-center gap-5 px-5 py-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-800 cursor-pointer dark:hover:text-gray-300"
-          >
-            {route.icon}
-            <span>{route.name}</span>
-          </Link>
-        )
-      })}
-    </div>
+    <aside className="p-5 w-64 dark:bg-[#1e1e2d] dark:text-gray-500 h-screen transition-all duration-300">
+      <nav className="flex flex-col w-full gap-5">
+        {routes.map((route, index) => {
+          return (
+            <Link
+              href={route.path}
+              key={route.name}
+              className={cn(
+                "transition-all duration-100 flex items-center gap-5 px-5 py-2 rounded-md hover:bg-gray-300 dark:hover:bg-gray-800 dark:hover:text-gray-300",
+                router.asPath === route.path.pathname &&
+                  "bg-gray-200 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300 shadow-lg"
+              )}
+            >
+              {route.icon}
+              <span>{route.name}</span>
+            </Link>
+          )
+        })}
+      </nav>
+    </aside>
   )
 }
 

@@ -23,12 +23,12 @@ const ThemeContextProvider = ({ children }: { children: React.ReactNode }) => {
     [isDarkTheme]
   )
 
-  //   React.useEffect(() => {
-  //     const isDarkTheme = localStorage.getItem("isDarkTheme")
-  //     if (isDarkTheme) {
-  //       setIsDarkTheme(isDarkTheme === "true")
-  //     }
-  //   }, [isDarkTheme])
+  React.useEffect(() => {
+    const isDarkTheme = localStorage.getItem("isDarkTheme")
+    if (isDarkTheme) {
+      setIsDarkTheme(isDarkTheme === "true")
+    }
+  }, [isDarkTheme])
 
   return <ThemeContext.Provider value={themeContextObj}>{children}</ThemeContext.Provider>
 }

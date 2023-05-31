@@ -20,11 +20,13 @@ const Layout: BlitzLayout<{ title?: string; children?: React.ReactNode }> = ({
       </Head>
 
       <div className={`${isDarkTheme ? "dark" : ""}`}>
-        <div className="flex-1 flex gap-6">
+        <div className="flex-1 flex bg-[#f5f8fa] dark:bg-[#151521]">
           <Sidebar />
-          <div className="flex-1">
+          <div className="flex-1 flex flex-col h-screen overflow-y-hidden">
             <TopBar />
-            {children}
+            <div className="flex flex-1 px-5 h-[calc(100vh-64px)] overflow-y-auto bg-gray-200 dark:bg-[#151521]">
+              {children}
+            </div>
           </div>
         </div>
       </div>
