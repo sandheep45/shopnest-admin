@@ -5,10 +5,15 @@ import { Media, Product } from "@prisma/client"
 import { Button } from "@src/core/components/common/Button"
 import { Checkbox } from "@src/core/components/common/Checkbox"
 import { DataTable } from "@src/core/components/common/DataTable"
+import StarRating from "@src/core/components/common/StarRating"
+import StatusBadge from "@src/core/components/global/StatusBadge"
 import { ColumnDef } from "@tanstack/react-table"
 
 interface IProduct extends Product {
   Media: Media | null
+  Category: {
+    name: string
+  } | null
 }
 
 interface ITableProps extends React.HTMLAttributes<HTMLTableElement> {
@@ -23,9 +28,9 @@ export const columns: ColumnDef<IProduct>[] = [
   },
   {
     accessorKey: "name",
-    header: () => <div className="text-center">Category Name</div>,
+    header: () => <div className="text-center">Product Name</div>,
     cell: (info) => (
-      <div className="flex items-center gap-4 font-medium">
+      <div className="flex items-center gap-4 font-medium w-48">
         <Image
           width={50}
           height={50}
@@ -33,24 +38,39 @@ export const columns: ColumnDef<IProduct>[] = [
           src={info.row.original.Media?.url as string}
           className="rounded-md"
         />
-        {info.row.getValue("name")}
+        <span className="truncate">{info.row.getValue("name")}</span>
       </div>
     ),
   },
   {
-    accessorKey: "email",
-    header: () => <div className="text-center">Email</div>,
-    cell: ({ row }) => <div className="text-center font-medium">{row.getValue("email")}</div>,
+    accessorKey: "description",
+    header: () => <div className="text-center">Description</div>,
+    cell: ({ row }) => (
+      <div className="text-center font-medium w-64 md:w-auto">{row.original.description}</div>
+    ),
   },
   {
-    accessorKey: "role",
-    header: () => <div className="text-center">Role</div>,
-    cell: (info) => <div className="text-center font-medium">{info.row.getValue("role")}</div>,
+    accessorKey: "category",
+    header: () => <div className="text-center">Category</div>,
+    cell: ({ row }) => <div className="text-center font-medium">{row.original.Category?.name}</div>,
+  },
+  {
+    accessorKey: "rating",
+    header: () => <div className="text-center">Rating</div>,
+    cell: (info) => (
+      <div className="text-center font-medium">
+        <StarRating count={info.row.original.rating} />
+      </div>
+    ),
   },
   {
     accessorKey: "status",
     header: () => <div className="text-center">Status</div>,
-    cell: ({ row }) => <div className="text-center font-medium">{row.getValue("status")}</div>,
+    cell: ({ row }) => (
+      <div className="flex items-center justify-center">
+        <StatusBadge status={row.original.status} />
+      </div>
+    ),
   },
   {
     accessorKey: "actions",

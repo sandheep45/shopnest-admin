@@ -20,7 +20,12 @@ export default resolver.pipe(
       take,
       count: () => db.product.count({ where }),
       query: (paginateArgs) =>
-        db.product.findMany({ ...paginateArgs, where, orderBy, include: { Media: true } }),
+        db.product.findMany({
+          ...paginateArgs,
+          where,
+          orderBy,
+          include: { Media: true, Category: { select: { name: true } } },
+        }),
     })
 
     return {

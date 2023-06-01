@@ -26,7 +26,7 @@ export const columns: ColumnDef<IUser>[] = [
     accessorKey: "name",
     header: () => <div className="text-center">Person Name</div>,
     cell: (info) => (
-      <div className="flex items-center gap-4 font-medium">
+      <div className="flex items-center gap-4 font-medium w-36 md:w-auto">
         <Image
           width={50}
           height={50}
@@ -34,14 +34,16 @@ export const columns: ColumnDef<IUser>[] = [
           src={info.row.original.Media?.url as string}
           className="rounded-md"
         />
-        {info.row.getValue("name")}
+        <span className="truncate">{info.row.getValue("name")}</span>
       </div>
     ),
   },
   {
     accessorKey: "email",
     header: () => <div className="text-center">Email</div>,
-    cell: ({ row }) => <div className="text-center font-medium">{row.getValue("email")}</div>,
+    cell: ({ row }) => (
+      <div className="text-center font-medium truncate">{row.getValue("email")}</div>
+    ),
   },
   {
     accessorKey: "role",
@@ -57,7 +59,9 @@ export const columns: ColumnDef<IUser>[] = [
     accessorKey: "createdAt",
     header: () => <div className="text-center">Created At</div>,
     cell: ({ row }) => (
-      <div className="text-center font-medium">{formatDate(row.original.createdAt)}</div>
+      <div className="text-center font-medium w-36 md:w-auto">
+        {formatDate(row.original.createdAt)}
+      </div>
     ),
   },
   {

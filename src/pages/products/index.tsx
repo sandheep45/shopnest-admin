@@ -46,7 +46,7 @@ const ProductsPage = () => {
     <Layout title="Product List">
       <div className="flex flex-col gap-5 w-full">
         <h1 className="text-xl font-semibold text-gray-800 dark:text-gray-200 px-2">
-          Category Listing
+          Product Listing
         </h1>
         <div className="w-full flex flex-col gap-7 p-5 dark:bg-[#1e1e2d] bg-[#f5f8fa] rounded-md">
           {/* <div className="flex items-center justify-between">

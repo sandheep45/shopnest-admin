@@ -47,23 +47,6 @@ function selectRandomMultipleUsers(userCount: number, users: any[]): any[] {
   return randomUsers
 }
 
-const seed = async () => {
-  //Upadte users to have image
-  const users = await db.user.findMany()
-
-  for (const user of users) {
-    await db.user.update({
-      where: { id: user.id },
-      data: {
-        Media: {
-          create: {
-            type: "IMAGE",
-            url: faker.image.urlLoremFlickr({ category: "people" }),
-          },
-        },
-      },
-    })
-  }
-}
+const seed = async () => {}
 
 export default seed
