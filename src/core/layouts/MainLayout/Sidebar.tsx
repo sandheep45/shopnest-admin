@@ -8,6 +8,7 @@ import { RiAdminFill } from "react-icons/ri"
 
 import { Routes } from "@blitzjs/next"
 import { Sheet, SheetContent, SheetTrigger } from "@src/core/components/common/Drawer"
+import { useThemeContext } from "@src/core/context/ThemeContext"
 import { cn } from "@src/lib/utils"
 
 const routes = [
@@ -45,9 +46,10 @@ const routes = [
 
 const Sidebar = () => {
   const router = useRouter()
+  const { isDarkTheme } = useThemeContext()
   return (
     <div className="relative">
-      <aside className="p-5 hidden md:block w-64 dark:bg-[#1e1e2d] dark:text-gray-500 h-screen transition-all duration-300">
+      <aside className="p-5 hidden md:block w-56 lg:w-64 dark:bg-[#1e1e2d] dark:text-gray-500 h-screen transition-all duration-300">
         <nav className="flex flex-col w-full gap-5">
           {routes.map((route, index) => {
             return (
@@ -71,12 +73,8 @@ const Sidebar = () => {
         <SheetTrigger className="absolute top-4 left-4 z-20 md:hidden dark:text-gray-500">
           <GiHamburgerMenu size={30} />
         </SheetTrigger>
-        <SheetContent
-          size="content"
-          position="left"
-          className="dark:bg-[#1e1e2d] dark:text-gray-500"
-        >
-          <aside className="p-2 w-48 dark:bg-[#1e1e2d] dark:text-gray-500 h-screen transition-all duration-300">
+        <SheetContent size="content" position="left" className={isDarkTheme ? "dark" : ""}>
+          <aside className="p-2 w-56 dark:bg-[#1e1e2d] dark:text-gray-500 h-screen transition-all duration-300">
             <nav className="flex flex-col w-full gap-5">
               {routes.map((route, index) => {
                 return (

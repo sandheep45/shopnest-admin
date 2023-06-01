@@ -5,6 +5,12 @@ import { Media, Product } from "@prisma/client"
 import { Button } from "@src/core/components/common/Button"
 import { Checkbox } from "@src/core/components/common/Checkbox"
 import { DataTable } from "@src/core/components/common/DataTable"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@src/core/components/common/DropdownMenu"
 import StarRating from "@src/core/components/common/StarRating"
 import StatusBadge from "@src/core/components/global/StatusBadge"
 import { ColumnDef } from "@tanstack/react-table"
@@ -23,14 +29,26 @@ interface ITableProps extends React.HTMLAttributes<HTMLTableElement> {
 export const columns: ColumnDef<IProduct>[] = [
   {
     accessorKey: "id",
-    header: () => <Checkbox />,
-    cell: ({ row }) => <Checkbox />,
+    header: ({ table }) => (
+      <Checkbox
+        checked={table.getIsAllPageRowsSelected()}
+        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+        className="mx-3"
+      />
+    ),
+    cell: ({ row }) => (
+      <Checkbox
+        checked={row.getIsSelected()}
+        onCheckedChange={(value) => row.toggleSelected(!!value)}
+        className="mx-3"
+      />
+    ),
   },
   {
     accessorKey: "name",
     header: () => <div className="text-center">Product Name</div>,
     cell: (info) => (
-      <div className="flex items-center gap-4 font-medium w-48">
+      <div className="flex items-center gap-4 font-medium w-48 lg:w-auto">
         <Image
           width={50}
           height={50}
@@ -46,7 +64,7 @@ export const columns: ColumnDef<IProduct>[] = [
     accessorKey: "description",
     header: () => <div className="text-center">Description</div>,
     cell: ({ row }) => (
-      <div className="text-center font-medium w-64 md:w-auto">{row.original.description}</div>
+      <div className="text-center font-medium w-64 xl:w-auto">{row.original.description}</div>
     ),
   },
   {
@@ -74,13 +92,17 @@ export const columns: ColumnDef<IProduct>[] = [
   },
   {
     accessorKey: "actions",
-    header: () => <div className="text-center">Action</div>,
+    header: () => <div className="text-center"></div>,
     cell: ({ row }) => (
-      <div className="text-center font-medium flex gap-3">
-        <Button onClick={() => alert(row.original.id)} variant="destructive">
-          Delete
-        </Button>
-      </div>
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild className="mx-5">
+          <Button>Action</Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent>
+          <DropdownMenuItem>Edit</DropdownMenuItem>
+          <DropdownMenuItem>Delete</DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
     ),
   },
 ]

@@ -57,12 +57,12 @@ const UsersPage = () => {
           User Listing
         </h1>
         <div className="w-full flex flex-col gap-7 p-5 dark:bg-[#1e1e2d] bg-[#f5f8fa] rounded-md">
-          {/* <div className="flex items-center justify-between">
-            <Input className="w-auto" placeholder="Search" />
+          <div className="flex items-center justify-between flex-col sm:flex-row w-full gap-2">
+            <Input className="sm:w-[140px] md:w-auto" placeholder="Search" />
 
-            <div className="flex gap-3">
+            <div className="flex items-center justify-end w-full gap-1 lg:gap-3">
               <Select>
-                <SelectTrigger className="w-[180px]">
+                <SelectTrigger className="w-full sm:w-[150px] dark:bg-[#1e1e2d] dark:text-gray-400">
                   <SelectValue placeholder="Theme" />
                 </SelectTrigger>
                 <SelectContent>
@@ -71,10 +71,10 @@ const UsersPage = () => {
                   <SelectItem value="system">System</SelectItem>
                 </SelectContent>
               </Select>
-              <Button>Filter</Button>
-              <Button>Export</Button>
+              <Button className="w-full sm:w-fit">Filter</Button>
+              <Button className="w-full sm:w-fit">Export</Button>
             </div>
-          </div> */}
+          </div>
 
           <Suspense fallback={<>Loading...</>}>
             <UsersList />

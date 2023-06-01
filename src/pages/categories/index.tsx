@@ -7,7 +7,15 @@ import { BlitzPage } from "@blitzjs/auth"
 import { usePaginatedQuery } from "@blitzjs/rpc"
 import CategoryTable from "@src/categories/components/CategoryTable"
 import { Button } from "@src/core/components/common/Button"
+import { Input } from "@src/core/components/common/Input"
 import { ScrollArea, ScrollBar } from "@src/core/components/common/ScrollArea"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@src/core/components/common/Select"
 
 const ITEMS_PER_PAGE = 10
 
@@ -50,24 +58,24 @@ const CategoriesPage: BlitzPage = () => {
           Category Listing
         </h1>
         <div className="w-full flex flex-col gap-7 p-5 dark:bg-[#1e1e2d] bg-[#f5f8fa] rounded-md">
-          {/* <div className="flex items-center justify-between">
-            <Input className="w-auto" placeholder="Search" />
+          <div className="flex items-center justify-between flex-col sm:flex-row w-full gap-2">
+            <Input className="sm:w-[140px] md:w-auto" placeholder="Search" />
 
-            <div className="flex gap-3">
+            <div className="flex items-center justify-end w-full gap-1 lg:gap-3">
               <Select>
-                <SelectTrigger className="w-[180px]">
+                <SelectTrigger className="w-full sm:w-[150px] dark:bg-[#1e1e2d] dark:text-gray-400">
                   <SelectValue placeholder="Theme" />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className="dark:bg-[#1e1e2d] dark:text-gray-500">
                   <SelectItem value="light">Light</SelectItem>
                   <SelectItem value="dark">Dark</SelectItem>
                   <SelectItem value="system">System</SelectItem>
                 </SelectContent>
               </Select>
-              <Button>Filter</Button>
-              <Button>Export</Button>
+              <Button className="w-full sm:w-fit">Filter</Button>
+              <Button className="w-full sm:w-fit">Export</Button>
             </div>
-          </div> */}
+          </div>
 
           <Suspense fallback={<>Loading...</>}>
             <CategoriesList />

@@ -5,6 +5,12 @@ import { Media, User } from "@prisma/client"
 import { Button } from "@src/core/components/common/Button"
 import { Checkbox } from "@src/core/components/common/Checkbox"
 import { DataTable } from "@src/core/components/common/DataTable"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@src/core/components/common/DropdownMenu"
 import formatDate from "@src/lib/dateFormator"
 import { ColumnDef } from "@tanstack/react-table"
 
@@ -19,14 +25,26 @@ interface ITableProps extends React.HTMLAttributes<HTMLTableElement> {
 export const columns: ColumnDef<IUser>[] = [
   {
     accessorKey: "id",
-    header: () => <Checkbox />,
-    cell: ({ row }) => <Checkbox />,
+    header: ({ table }) => (
+      <Checkbox
+        checked={table.getIsAllPageRowsSelected()}
+        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+        className="mx-3"
+      />
+    ),
+    cell: ({ row }) => (
+      <Checkbox
+        checked={row.getIsSelected()}
+        onCheckedChange={(value) => row.toggleSelected(!!value)}
+        className="mx-3"
+      />
+    ),
   },
   {
     accessorKey: "name",
     header: () => <div className="text-center">Person Name</div>,
     cell: (info) => (
-      <div className="flex items-center gap-4 font-medium w-36 md:w-auto">
+      <div className="flex items-center gap-4 font-medium w-36 lg:w-auto">
         <Image
           width={50}
           height={50}
@@ -59,20 +77,24 @@ export const columns: ColumnDef<IUser>[] = [
     accessorKey: "createdAt",
     header: () => <div className="text-center">Created At</div>,
     cell: ({ row }) => (
-      <div className="text-center font-medium w-36 md:w-auto">
+      <div className="text-center font-medium w-36 xl:w-auto">
         {formatDate(row.original.createdAt)}
       </div>
     ),
   },
   {
     accessorKey: "actions",
-    header: () => <div className="text-center">Action</div>,
+    header: () => <div className="text-center"></div>,
     cell: ({ row }) => (
-      <div className="text-center font-medium flex gap-3">
-        <Button onClick={() => alert(row.original.id)} variant="destructive">
-          Delete
-        </Button>
-      </div>
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild className="mx-5">
+          <Button>Action</Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent className="">
+          <DropdownMenuItem>Edit</DropdownMenuItem>
+          <DropdownMenuItem>Delete</DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
     ),
   },
 ]

@@ -5,6 +5,12 @@ import { Category, Media } from "@prisma/client"
 import { Button } from "@src/core/components/common/Button"
 import { Checkbox } from "@src/core/components/common/Checkbox"
 import { DataTable } from "@src/core/components/common/DataTable"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@src/core/components/common/DropdownMenu"
 import StatusBadge from "@src/core/components/global/StatusBadge"
 import { ColumnDef } from "@tanstack/react-table"
 
@@ -19,14 +25,26 @@ interface ITableProps extends React.HTMLAttributes<HTMLTableElement> {
 export const columns: ColumnDef<ICategory>[] = [
   {
     accessorKey: "id",
-    header: () => <Checkbox />,
-    cell: ({ row }) => <Checkbox />,
+    header: ({ table }) => (
+      <Checkbox
+        checked={table.getIsAllPageRowsSelected()}
+        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+        className="mx-3"
+      />
+    ),
+    cell: ({ row }) => (
+      <Checkbox
+        checked={row.getIsSelected()}
+        onCheckedChange={(value) => row.toggleSelected(!!value)}
+        className="mx-3"
+      />
+    ),
   },
   {
     accessorKey: "name",
     header: () => <div className="text-center">Category Name</div>,
     cell: (info) => (
-      <div className="flex w-32 md:w-auto items-center gap-4 font-medium">
+      <div className="flex w-32 lg:w-auto items-center gap-4 font-medium">
         <Image
           width={50}
           height={50}
@@ -34,7 +52,7 @@ export const columns: ColumnDef<ICategory>[] = [
           src={info.row.original.Media?.url as string}
           className="rounded-md"
         />
-        <span className="trunate">{info.row.getValue("name")}</span>
+        <span className="truncate">{info.row.getValue("name")}</span>
       </div>
     ),
   },
@@ -42,7 +60,7 @@ export const columns: ColumnDef<ICategory>[] = [
     accessorKey: "description",
     header: () => <div className="text-center">Description</div>,
     cell: (info) => (
-      <div className="text-center font-medium w-64 md:w-auto">{info.row.original.description}</div>
+      <div className="text-center font-medium w-64 lg:w-auto">{info.row.original.description}</div>
     ),
   },
   {
@@ -56,13 +74,17 @@ export const columns: ColumnDef<ICategory>[] = [
   },
   {
     accessorKey: "actions",
-    header: () => <div className="text-center">Action</div>,
+    header: () => <div className="text-center"></div>,
     cell: ({ row }) => (
-      <div className="text-center font-medium flex gap-3">
-        <Button className="mx-auto" onClick={() => alert(row.original.id)} variant="destructive">
-          Delete
-        </Button>
-      </div>
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild className="mx-5">
+          <Button>Action</Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent>
+          <DropdownMenuItem>Edit</DropdownMenuItem>
+          <DropdownMenuItem>Delete</DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
     ),
   },
 ]
