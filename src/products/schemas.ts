@@ -7,6 +7,7 @@ export const CreateProductSchema = z.object({
   description: z.string(),
   tags: z.string(),
   status: z.nativeEnum(Status),
+  rating: z.number(),
   // template: __fieldName__: z.__zodType__(),
 })
 export const UpdateProductSchema = z.object({
