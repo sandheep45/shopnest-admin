@@ -5,6 +5,7 @@ import Layout from "src/core/layouts/Layout"
 
 import { BlitzPage } from "@blitzjs/auth"
 import { usePaginatedQuery } from "@blitzjs/rpc"
+import CategoryLoadingTable from "@src/categories/components/CategoryLoadingTable"
 import CategoryTable from "@src/categories/components/CategoryTable"
 import { Button } from "@src/core/components/common/Button"
 import { Input } from "@src/core/components/common/Input"
@@ -77,7 +78,7 @@ const CategoriesPage: BlitzPage = () => {
             </div>
           </div>
 
-          <Suspense fallback={<>Loading...</>}>
+          <Suspense fallback={<CategoryLoadingTable />}>
             <CategoriesList />
           </Suspense>
         </div>

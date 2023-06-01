@@ -14,6 +14,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@src/core/components/common/Select"
+import ProductLoadingTable from "@src/products/components/ProductLoadingTable"
 import ProductTable from "@src/products/components/ProductTable"
 
 const ITEMS_PER_PAGE = 10
@@ -76,7 +77,7 @@ const ProductsPage = () => {
             </div>
           </div>
 
-          <Suspense fallback={<>Loading...</>}>
+          <Suspense fallback={<ProductLoadingTable />}>
             <ProductsList />
           </Suspense>
         </div>
