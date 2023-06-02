@@ -5,8 +5,8 @@ import { Login } from "src/auth/schemas"
 
 import { Routes } from "@blitzjs/next"
 import { useMutation } from "@blitzjs/rpc"
-import Form, { FORM_ERROR } from "@src/core/components/common/Form"
 import LabeledTextField from "@src/core/components/common/LabeledTextField"
+import Form, { FORM_ERROR } from "@src/core/components/global/Form"
 
 type LoginFormProps = {
   onSuccess?: (user: PromiseReturnType<typeof login>) => void

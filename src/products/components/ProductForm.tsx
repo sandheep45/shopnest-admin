@@ -1,9 +1,9 @@
 import React, { Suspense } from "react"
 import { z } from "zod"
 
-import Form, { FormProps } from "@src/core/components/common/Form"
+import Form, { FormProps } from "@src/core/components/global/Form"
 
-export { FORM_ERROR } from "@src/core/components/common/Form"
+export { FORM_ERROR } from "@src/core/components/global/Form"
 
 export function ProductForm<S extends z.ZodType<any, any>>(props: FormProps<S>) {
   return (

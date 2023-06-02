@@ -1,8 +1,9 @@
 import React from "react"
-import { Form, FormProps } from "src/core/components/common/Form"
 import { z } from "zod"
 
-export { FORM_ERROR } from "src/core/components/common/Form"
+import Form, { FormProps } from "@src/core/components/global/Form"
+
+export { FORM_ERROR } from "@src/core/components/global/Form"
 
 export function UserForm<S extends z.ZodType<any, any>>(props: FormProps<S>) {
   return (

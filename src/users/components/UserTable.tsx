@@ -1,6 +1,8 @@
 import Image from "next/image"
+import Link from "next/link"
 import React from "react"
 
+import { Routes } from "@blitzjs/next"
 import { Media, User } from "@prisma/client"
 import { Button } from "@src/core/components/common/Button"
 import { Checkbox } from "@src/core/components/common/Checkbox"
@@ -52,7 +54,9 @@ export const columns: ColumnDef<IUser>[] = [
           src={info.row.original.Media?.url as string}
           className="rounded-md"
         />
-        <span className="truncate">{info.row.getValue("name")}</span>
+        <Link href={Routes.EditUserPage({ userId: info.row.original.id })} className="truncate">
+          {info.row.getValue("name")}
+        </Link>
       </div>
     ),
   },
@@ -91,7 +95,11 @@ export const columns: ColumnDef<IUser>[] = [
           <Button>Action</Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="">
-          <DropdownMenuItem>Edit</DropdownMenuItem>
+          <DropdownMenuItem>
+            <Link href={Routes.EditUserPage({ userId: row.original.id })} className="truncate">
+              Edit
+            </Link>
+          </DropdownMenuItem>
           <DropdownMenuItem>Delete</DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

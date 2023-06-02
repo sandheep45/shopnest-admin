@@ -1,9 +1,9 @@
 import signup from "src/auth/mutations/signup"
 import { Signup } from "src/auth/schemas"
-import { Form, FORM_ERROR } from "src/core/components/common/Form"
 import { LabeledTextField } from "src/core/components/common/LabeledTextField"
 
 import { useMutation } from "@blitzjs/rpc"
+import Form, { FORM_ERROR } from "@src/core/components/global/Form"
 
 type SignupFormProps = {
   onSuccess?: () => void
