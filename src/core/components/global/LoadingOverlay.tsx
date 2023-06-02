@@ -1,5 +1,3 @@
-import { Portal } from "@radix-ui/react-portal"
-
 import Loader from "../common/Loader"
 
 interface LoadingOverlayProps {
