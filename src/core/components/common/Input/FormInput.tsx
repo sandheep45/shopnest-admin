@@ -1,32 +1,30 @@
 import React from "react"
-import { Control, FieldError } from "react-hook-form"
+import { useFormContext } from "react-hook-form"
 
 import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "../Form"
 import { Input } from "./Input"
 
-interface IFormInputProps {
+interface IFormInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   name: string
   label: string
   description?: string
-  placeholder?: string
-  type?: string
-  control: Control
-  error?: FieldError
+  type: string
 }
 
-const FormInput: React.FC<IFormInputProps> = (props) => {
+const FormInput: React.FC<IFormInputProps> = ({ label, description, ...props }) => {
+  const { control } = useFormContext()
   return (
     <FormField
-      control={props.control}
+      control={control}
       name={props.name}
-      render={({ field }) => (
+      render={({ field, formState: { isSubmitting, errors } }) => (
         <FormItem>
-          <FormLabel>{props.label}</FormLabel>
+          <FormLabel>{label}</FormLabel>
           <FormControl>
-            <Input placeholder={props.placeholder} {...field} />
+            <Input disabled={isSubmitting} placeholder={props.placeholder} {...field} {...props} />
           </FormControl>
-          <FormDescription>{props.description}</FormDescription>
-          <FormMessage>{props.error?.message}</FormMessage>
+          <FormDescription>{description}</FormDescription>
+          <FormMessage>{errors.root?.message}</FormMessage>
         </FormItem>
       )}
     />

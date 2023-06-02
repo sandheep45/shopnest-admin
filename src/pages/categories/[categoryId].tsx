@@ -9,12 +9,13 @@ import Layout from "src/core/layouts/Layout"
 import { BlitzPage } from "@blitzjs/auth"
 import { Routes, useParam } from "@blitzjs/next"
 import { useMutation, useQuery } from "@blitzjs/rpc"
+import LoadingOverlay from "@src/core/components/global/LoadingOverlay"
 
 export const Category = () => {
   const router = useRouter()
   const categoryId = useParam("categoryId", "string")
   const [deleteCategoryMutation] = useMutation(deleteCategory)
-  const [category] = useQuery(getCategory, { id: categoryId })
+  const [category, { isLoading, isFetching }] = useQuery(getCategory, { id: categoryId })
 
   return (
     <>
@@ -23,6 +24,7 @@ export const Category = () => {
       </Head>
 
       <div>
+        <LoadingOverlay isOpen={isLoading || isFetching} />
         <h1>Category {category.id}</h1>
         <pre>{JSON.stringify(category, null, 2)}</pre>
 

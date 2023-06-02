@@ -1,26 +1,34 @@
 import React from "react"
-import { Control } from "react-hook-form"
+import { useFormContext } from "react-hook-form"
 
 import { FormControl, FormDescription, FormField, FormItem, FormLabel } from "../Form"
 import { Checkbox } from "./Checkbox"
 
-interface IFormCheckboxProps {
-  control: Control
+interface IFormCheckboxProps extends React.HTMLAttributes<HTMLInputElement> {
+  label: string
+  description?: string
+  name: string
+  isLabelHidden?: boolean
 }
 
 const FormCheckbox: React.FC<IFormCheckboxProps> = (props) => {
+  const { control } = useFormContext()
   return (
     <FormField
-      control={props.control}
-      name="mobile"
-      render={({ field }) => (
+      control={control}
+      name={props.name}
+      render={({ field, formState: { isSubmitting } }) => (
         <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
           <FormControl>
-            <Checkbox checked={field.value} onCheckedChange={field.onChange} />
+            <Checkbox
+              disabled={isSubmitting}
+              checked={field.value}
+              onCheckedChange={field.onChange}
+            />
           </FormControl>
           <div className="space-y-1 leading-none">
-            <FormLabel>Use different settings for my mobile devices</FormLabel>
-            <FormDescription>You can manage your mobile notifications in the </FormDescription>
+            {!props.isLabelHidden && <FormLabel>{props.label}</FormLabel>}
+            <FormDescription>{props.description}</FormDescription>
           </div>
         </FormItem>
       )}

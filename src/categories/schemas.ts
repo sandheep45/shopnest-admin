@@ -3,14 +3,17 @@ import { z } from "zod"
 import { Mediatype, Status } from "@prisma/client"
 
 export const CreateCategorySchema = z.object({
-  name: z.string(),
-  description: z.string(),
+  name: z.string().min(1),
+  description: z.string().min(1),
   status: z.nativeEnum(Status).default(Status.DRAFT),
-  tags: z.string({ description: "Comma separated tags" }),
+  tags: z.string({ description: "Comma separated tags" }).min(1),
   Media: z.object({
     create: z.object({
-      type: z.nativeEnum(Mediatype),
-      url: z.string(),
+      type: z.nativeEnum(Mediatype).default(Mediatype.IMAGE),
+      url: z
+        .string()
+        .regex(/^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$/)
+        .min(1),
     }),
   }),
 })

@@ -1,33 +1,42 @@
 import React from "react"
-import { Control } from "react-hook-form"
+import { useFormContext } from "react-hook-form"
 
 import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "../Form"
 import { Textarea, TextareaProps } from "./TextArea"
 
 interface IFormTextAreaProps extends TextareaProps {
-  control: Control
+  name: string
+  description?: string
+  label: string
+  isLabelHidden?: boolean
 }
 
-const FormTextArea: React.FC<IFormTextAreaProps> = ({ control, ...restProps }) => {
+const FormTextArea: React.FC<IFormTextAreaProps> = ({
+  description,
+  name,
+  label,
+  isLabelHidden,
+  ...props
+}) => {
+  const { control } = useFormContext()
   return (
     <FormField
       control={control}
-      name="bio"
-      render={({ field }) => (
+      name={name}
+      render={({ field, formState: { isSubmitting, errors } }) => (
         <FormItem>
-          <FormLabel>Bio</FormLabel>
+          {!isLabelHidden && <FormLabel>{label}</FormLabel>}
           <FormControl>
             <Textarea
+              disabled={isSubmitting}
               placeholder="Tell us a little bit about yourself"
               className="resize-none"
               {...field}
-              {...restProps}
+              {...props}
             />
           </FormControl>
-          <FormDescription>
-            You can <span>@mention</span> other users and organizations.
-          </FormDescription>
-          <FormMessage />
+          <FormDescription>{description}</FormDescription>
+          <FormMessage>{errors.root?.message}</FormMessage>
         </FormItem>
       )}
     />

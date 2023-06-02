@@ -17,13 +17,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@src/core/components/common/Select"
+import LoadingOverlay from "@src/core/components/global/LoadingOverlay"
 
 const ITEMS_PER_PAGE = 10
 
 export const CategoriesList = () => {
   const router = useRouter()
   const page = Number(router.query.page) || 0
-  const [{ categories, hasMore }] = usePaginatedQuery(getCategories, {
+  const [{ categories, hasMore }, { isLoading, isFetching }] = usePaginatedQuery(getCategories, {
     orderBy: { id: "asc" },
     skip: ITEMS_PER_PAGE * page,
     take: ITEMS_PER_PAGE,
@@ -33,7 +34,8 @@ export const CategoriesList = () => {
   const goToNextPage = () => router.push({ query: { page: page + 1 } })
 
   return (
-    <div className="flex flex-col gap-8 w-full">
+    <div className="flex flex-col gap-8 w-full relative">
+      <LoadingOverlay isOpen={isLoading || isFetching} />
       <ScrollArea className="h-[calc(100vh-220px)] w-full overflow-x-auto">
         <CategoryTable categories={categories} />
         <ScrollBar orientation="horizontal" />

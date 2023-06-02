@@ -1,25 +1,33 @@
 import React from "react"
-import { Control } from "react-hook-form"
+import { useFormContext } from "react-hook-form"
 
 import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "../Form"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./Select"
 
 interface IFormSelectProps {
-  control: Control
+  name: string
+  description?: string
+  label: string
+  isLabelHidden?: boolean
+  placeholder?: string
 }
 
 const FormSelect: React.FC<IFormSelectProps> = (props) => {
+  const {
+    control,
+    formState: { isSubmitting, errors },
+  } = useFormContext()
   return (
     <FormField
-      control={props.control}
-      name="email"
+      control={control}
+      name={props.name}
       render={({ field }) => (
         <FormItem>
-          <FormLabel>Email</FormLabel>
-          <Select onValueChange={field.onChange} defaultValue={field.value}>
+          {!props.isLabelHidden && <FormLabel>{props.label}</FormLabel>}
+          <Select disabled={isSubmitting} onValueChange={field.onChange} defaultValue={field.value}>
             <FormControl>
               <SelectTrigger>
-                <SelectValue placeholder="Select a verified email to display" />
+                <SelectValue placeholder={props.placeholder} />
               </SelectTrigger>
             </FormControl>
             <SelectContent>
@@ -28,8 +36,8 @@ const FormSelect: React.FC<IFormSelectProps> = (props) => {
               <SelectItem value="m@support.com">m@support.com</SelectItem>
             </SelectContent>
           </Select>
-          <FormDescription>You can manage email addresses in your </FormDescription>
-          <FormMessage />
+          <FormDescription>{props.description}</FormDescription>
+          <FormMessage>{errors.root?.message}</FormMessage>
         </FormItem>
       )}
     />
