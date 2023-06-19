@@ -12,6 +12,7 @@ const config = {
       "loremflickr.com",
       "picsum.photos",
       "via.placeholder.com",
+      "res.cloudinary.com",
     ],
   },
 }

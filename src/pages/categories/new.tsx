@@ -64,6 +64,7 @@ const NewCategoryPage: BlitzPage = () => {
           />
           <FormInput type="text" className="border" name="tags" label="Tags" placeholder="Name" />
           <FormInput
+            accept="image/*"
             type="file"
             className="border"
             name="Media.create.url"

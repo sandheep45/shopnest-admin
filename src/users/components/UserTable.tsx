@@ -94,7 +94,7 @@ export const columns: ColumnDef<IUser>[] = [
         <DropdownMenuTrigger asChild className="mx-5">
           <Button>Action</Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="">
+        <DropdownMenuContent className="dark:bg-orange-400">
           <DropdownMenuItem>
             <Link href={Routes.EditUserPage({ userId: row.original.id })} className="truncate">
               Edit
