@@ -14,6 +14,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@src/core/components/common/Select"
+import LoadingOverlay from "@src/core/components/global/LoadingOverlay"
 import ProductLoadingTable from "@src/products/components/ProductLoadingTable"
 import ProductTable from "@src/products/components/ProductTable"
 
@@ -22,7 +23,7 @@ const ITEMS_PER_PAGE = 10
 export const ProductsList = () => {
   const router = useRouter()
   const page = Number(router.query.page) || 0
-  const [{ products, hasMore }] = usePaginatedQuery(
+  const [{ products, hasMore }, { isLoading, isFetching }] = usePaginatedQuery(
     getProducts,
     {
       orderBy: { id: "asc" },
@@ -41,7 +42,8 @@ export const ProductsList = () => {
   const goToNextPage = () => router.push({ query: { page: page + 1 } })
 
   return (
-    <div className="flex flex-col gap-8 w-full">
+    <div className="flex flex-col gap-8 w-full relative">
+      <LoadingOverlay isOpen={isLoading || isFetching} />
       <ScrollArea className="h-[calc(100vh-220px)] w-full overflow-x-auto">
         <ProductTable products={products} />
         <ScrollBar orientation="horizontal" />

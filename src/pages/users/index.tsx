@@ -14,6 +14,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@src/core/components/common/Select"
+import LoadingOverlay from "@src/core/components/global/LoadingOverlay"
 import UsersLoadingTable from "@src/users/components/UsersLoadingStable"
 import UserTable from "@src/users/components/UserTable"
 
@@ -41,7 +42,8 @@ export const UsersList = () => {
   const goToNextPage = () => router.push({ query: { page: page + 1 } })
 
   return (
-    <div className="flex flex-col gap-8 w-full">
+    <div className="flex flex-col gap-8 w-full relative">
+      <LoadingOverlay isOpen={isLoading || isFetching} />
       <ScrollArea className="h-[calc(100vh-220px)] w-full overflow-x-auto">
         <UserTable users={users} />
         <ScrollBar orientation="horizontal" />
