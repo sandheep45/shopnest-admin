@@ -22,11 +22,20 @@ const ITEMS_PER_PAGE = 10
 export const UsersList = () => {
   const router = useRouter()
   const page = Number(router.query.page) || 0
-  const [{ users, hasMore }, { isLoading, isFetching }] = usePaginatedQuery(getUsers, {
-    orderBy: { id: "asc" },
-    skip: ITEMS_PER_PAGE * page,
-    take: ITEMS_PER_PAGE,
-  })
+  const [{ users, hasMore }, { isLoading, isFetching }] = usePaginatedQuery(
+    getUsers,
+    {
+      orderBy: { id: "asc" },
+      skip: ITEMS_PER_PAGE * page,
+      take: ITEMS_PER_PAGE,
+    },
+    {
+      refetchOnWindowFocus: false,
+      refetchOnMount: false,
+      refetchOnReconnect: false,
+      staleTime: 1000 * 20, // 20 seconds
+    }
+  )
 
   const goToPreviousPage = () => router.push({ query: { page: page - 1 } })
   const goToNextPage = () => router.push({ query: { page: page + 1 } })

@@ -8,7 +8,6 @@ import { withBlitz } from "src/blitz-client"
 
 import { AppProps, ErrorBoundary, ErrorComponent, ErrorFallbackProps } from "@blitzjs/next"
 import { Toaster } from "@src/core/components/common/Toast"
-import ThemeContextProvider from "@src/core/context/ThemeContext"
 
 function RootErrorFallback({ error }: ErrorFallbackProps) {
   if (error instanceof AuthenticationError) {
