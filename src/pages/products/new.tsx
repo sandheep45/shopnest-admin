@@ -68,114 +68,127 @@ const NewProductPage = () => {
             }
           }}
         >
-          <FormInput type="text" className="border" name="name" label="Name" placeholder="Name" />
           <FormInput
             type="text"
-            className="border"
+            className="border text-gray-200"
+            name="name"
+            label="Name"
+            placeholder="Name"
+          />
+          <FormInput
+            type="text"
+            className="border text-gray-200"
             name="description"
             label="Description"
             placeholder="Description"
           />
-          <FormInput type="text" className="border" name="tags" label="Tags" placeholder="Tags" />
           <FormInput
             type="text"
-            className="border"
+            className="border text-gray-200"
+            name="tags"
+            label="Tags"
+            placeholder="Tags"
+          />
+          <FormInput
+            type="text"
+            className="border text-gray-200"
             name="status"
             label="Status"
             placeholder="Status"
           />
           <FormInput
-            type="text"
-            className="border"
+            type="number"
+            className="border text-gray-200"
             name="rating"
             label="Rating"
             placeholder="Rating"
           />
           <FormInput
             type="text"
-            className="border"
+            className="border text-gray-200"
             name="Category.connect.id"
             label="Category"
             placeholder="Category"
           />
           <FormInput
             type="text"
-            className="border"
+            className="border text-gray-200"
             name="Variant.create.description"
             label="Varinat Desc"
             placeholder="Varinat Desc"
           />
           <FormInput
             type="number"
-            className="border"
+            className="border text-gray-200"
             name="Variant.create.sku"
             label="SKU"
             placeholder="SKU"
           />
           <FormInput
             type="number"
-            className="border"
+            className="border text-gray-200"
             name="Variant.create.price"
             label="Variant Price"
             placeholder="Variant Price"
           />
           <FormInput
             type="number"
-            className="border"
+            className="border text-gray-200"
             name="Variant.create.taxPercent"
             label="TaxPercent"
             placeholder="TaxPercent"
           />
           <FormInput
             type="number"
-            className="border"
+            className="border text-gray-200"
             name="Variant.create.barcode"
             label="Bar code"
             placeholder="Bar code"
           />
           <FormInput
             type="number"
-            className="border"
+            className="border text-gray-200"
             name="Variant.create.onSelfQuantity"
             label="onSelfQuantity"
             placeholder="onSelfQuantity"
           />
           <FormInput
             type="number"
-            className="border"
+            className="border text-gray-200"
             name="Variant.create.inWareHouseQuantity"
             label="inWareHouseQuantity"
             placeholder="inWareHouseQuantity"
           />
           <FormInput
             type="text"
-            className="border"
+            className="border text-gray-200"
             name="Variant.create.Media.create.url"
             label="Variant Image"
             placeholder="Variant Image"
           />
           <FormInput
-            type="text"
-            className="border"
+            type="file"
+            accept="image/*"
+            className="border text-gray-200"
             name="Media.create.url"
             label="Producr Image"
             placeholder="Producr Image"
           />
           <FormInput
             type="text"
-            className="border"
+            className="border text-gray-200"
             name="VariantOptions.create.name"
             label="VariantOptions"
             placeholder="VariantOptions"
           />
           <FormInput
             type="text"
-            className="border"
+            className="border text-gray-200"
             name="VariantOptions.create.value"
             label="VariantOptions"
             placeholder="VariantOptions"
           />
-          <Button className="border" type="submit">
+          <Button className="border text-gray-200 dark:text-gray-700" type="submit">
             Create Category
           </Button>
         </ProductForm>

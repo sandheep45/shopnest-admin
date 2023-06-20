@@ -1,7 +1,10 @@
+"use client"
+
 import { PropsWithoutRef, ReactNode, useState } from "react"
 import { useForm, UseFormProps } from "react-hook-form"
 import { z } from "zod"
 
+import { DevTool } from "@hookform/devtools"
 import { zodResolver } from "@hookform/resolvers/zod"
 
 import { FormProvider } from "../common/Form"
@@ -40,25 +43,29 @@ const Form = <S extends z.ZodType<any, any>>({
   const [formError, setFormError] = useState<string | null>(null)
 
   return (
-    <FormProvider {...ctx}>
-      <form
-        onSubmit={ctx.handleSubmit(async (values) => {
-          const result = (await onSubmit(values)) || {}
-          for (const [key, value] of Object.entries(result)) {
-            if (key === FORM_ERROR) {
-              setFormError(value)
-            } else {
-              ctx.setError(key as any, { type: "submit", message: value })
+    <>
+      <FormProvider {...ctx}>
+        <form
+          onSubmit={ctx.handleSubmit(async (values) => {
+            const result = (await onSubmit(values)) || {}
+            for (const [key, value] of Object.entries(result)) {
+              if (key === FORM_ERROR) {
+                setFormError(value)
+              } else {
+                ctx.setError(key as any, { type: "submit", message: value })
+              }
             }
-          }
-        })}
-        className="form"
-        {...props}
-      >
-        {/* Form fields supplied as children are rendered here */}
-        {children}
-      </form>
-    </FormProvider>
+          })}
+          className="form"
+          {...props}
+        >
+          {/* Form fields supplied as children are rendered here */}
+          {children}
+        </form>
+      </FormProvider>
+
+      <DevTool control={ctx.control} />
+    </>
   )
 }
 

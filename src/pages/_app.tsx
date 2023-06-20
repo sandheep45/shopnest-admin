@@ -2,6 +2,7 @@ import "src/styles/globals.css"
 import "src/core/styles/index.css"
 
 import { AuthenticationError, AuthorizationError } from "blitz"
+import { ThemeProvider } from "next-themes"
 import React, { Suspense } from "react"
 import { withBlitz } from "src/blitz-client"
 
@@ -32,7 +33,7 @@ function RootErrorFallback({ error }: ErrorFallbackProps) {
 function MyApp({ Component, pageProps }: AppProps) {
   const getLayout = Component.getLayout ?? ((page) => page)
   return (
-    <ThemeContextProvider>
+    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
       <ErrorBoundary FallbackComponent={RootErrorFallback}>
         {getLayout(
           <Suspense fallback="Loading...">
@@ -41,7 +42,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           </Suspense>
         )}
       </ErrorBoundary>
-    </ThemeContextProvider>
+    </ThemeProvider>
   )
 }
 

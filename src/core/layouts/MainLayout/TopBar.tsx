@@ -1,15 +1,15 @@
+import { useTheme } from "next-themes"
 import Image from "next/image"
 import { BsCloudMoonFill, BsCloudSunFill } from "react-icons/bs"
 
 import { Toggle } from "@src/core/components/common/Toggle"
-import { useThemeContext } from "@src/core/context/ThemeContext"
 
 const TopBar = () => {
-  const { isDarkTheme, setIsDarkTheme } = useThemeContext()
+  const { theme, setTheme } = useTheme()
 
   const toggleTheme = () => {
-    localStorage.setItem("isDarkTheme", JSON.stringify(!isDarkTheme))
-    setIsDarkTheme((currentValue) => !currentValue)
+    // localStorage.setItem("isDarkTheme", JSON.stringify(!isDarkTheme))
+    setTheme(theme === "dark" ? "light" : "dark")
   }
 
   return (
@@ -17,12 +17,12 @@ const TopBar = () => {
       <Toggle onClick={toggleTheme} aria-label="toggle-theme">
         <BsCloudSunFill
           className={`transition-all duration-700 ease-in-out ${
-            isDarkTheme ? "w-10 h-10" : "w-0 h-0"
+            theme === "dark" ? "w-10 h-10" : "w-0 h-0"
           }`}
         />
         <BsCloudMoonFill
           className={`transition-all duration-700 ease-in-out ${
-            !isDarkTheme ? "w-10 h-10" : "w-0 h-0"
+            theme !== "dark" ? "w-10 h-10" : "w-0 h-0"
           }`}
         />
       </Toggle>

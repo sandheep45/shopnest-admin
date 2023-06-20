@@ -1,5 +1,5 @@
 import React from "react"
-import { useFormContext } from "react-hook-form"
+import { ControllerRenderProps, FieldValues, useFormContext } from "react-hook-form"
 
 import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "../Form"
 import { Input } from "./Input"
@@ -13,15 +13,46 @@ interface IFormInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 
 const FormInput: React.FC<IFormInputProps> = ({ label, description, ...props }) => {
   const { control } = useFormContext()
+
+  const onChangeHandler = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    field: ControllerRenderProps<FieldValues, string>,
+    type: string,
+    accept?: string
+  ) => {
+    if (type === "number") return field.onChange(e.target.valueAsNumber)
+    if (type === "checkbox") return field.onChange(e.target.checked)
+    if (type === "date" || type === "time") return field.onChange(e.target.valueAsDate)
+    if (type === "file" && accept === "image/*") {
+      const file = e.target.files?.[0]
+      if (!file) return
+      const reader = new FileReader()
+      reader.readAsDataURL(file)
+      reader.onload = (e) => {
+        field.onChange(reader.result)
+      }
+
+      return
+    }
+
+    return field.onChange(e.target.value)
+  }
+
   return (
     <FormField
       control={control}
       name={props.name}
       render={({ field, formState: { isSubmitting, errors } }) => (
         <FormItem>
-          <FormLabel>{label}</FormLabel>
+          <FormLabel className="dark:text-gray-400">{label}</FormLabel>
           <FormControl>
-            <Input disabled={isSubmitting} placeholder={props.placeholder} {...field} {...props} />
+            <Input
+              disabled={isSubmitting}
+              placeholder={props.placeholder}
+              {...field}
+              onChange={(e) => onChangeHandler(e, field, props.type, props.accept)}
+              {...props}
+            />
           </FormControl>
           <FormDescription>{description}</FormDescription>
           <FormMessage>{errors.root?.message}</FormMessage>
