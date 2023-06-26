@@ -31,13 +31,14 @@ export default api(
             const email = profile.emails![0]?.value
             const user = await db.user.upsert({
               where: { email },
-              create: { email: email!, name: profile.displayName! },
+              create: { email: email!, name: profile.displayName },
               update: {},
             })
             done(null, {
               publicData: {
                 userId: user.id,
                 roles: [user.role],
+                imageUrl: profile.photos![0]?.value,
               },
             })
           }
@@ -52,19 +53,20 @@ export default api(
             clientID: process.env.FACEBOOK_CLIENT_ID!,
             clientSecret: process.env.FACEBOOK_CLIENT_SECRET!,
             callbackURL: generateBaseUrl("api/auth/facebook/callback"),
-            profileFields: ["id", "email", "name"],
+            profileFields: ["id", "email", "name", "photos"],
           },
           async function (_accessToken, _refreshToken, profile, done) {
             const email = profile.emails![0]?.value
             const user = await db.user.upsert({
               where: { email },
-              create: { email: email!, name: profile.displayName! },
+              create: { email: email!, name: profile.displayName },
               update: {},
             })
             done(null, {
               publicData: {
                 userId: user.id,
                 roles: [user.role],
+                imageUrl: profile.photos![0]?.value,
               },
             })
           }

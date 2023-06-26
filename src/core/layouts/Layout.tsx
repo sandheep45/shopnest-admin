@@ -18,14 +18,12 @@ const Layout: BlitzLayout<{ title?: string; children?: React.ReactNode }> = ({
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div>
-        <div className="flex-1 flex bg-[#f5f8fa] dark:bg-[#151521]">
-          <Sidebar />
-          <div className="flex-1 flex flex-col h-screen overflow-y-auto">
-            <TopBar />
-            <div className="flex flex-1 p-5 bg-gray-200 dark:bg-[#151521]">{children}</div>
-            <Footer />
-          </div>
+      <div className="flex-1 flex bg-[#f5f8fa] dark:bg-[#151521] transition-all duration-300">
+        <Sidebar />
+        <div className="flex-1 flex flex-col h-screen overflow-y-auto">
+          <TopBar />
+          <div className="flex flex-1 p-5 bg-gray-200 dark:bg-[#151521]">{children}</div>
+          <Footer />
         </div>
       </div>
     </>

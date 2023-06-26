@@ -2,6 +2,7 @@ import React from "react"
 
 import {
   CardContent,
+  CardFooter,
   CardHeader,
   CardPrimitive,
   CardTitle,
@@ -10,9 +11,24 @@ import { cn } from "@src/lib/utils"
 
 interface ICardProps extends React.HTMLAttributes<HTMLDivElement> {
   title?: string
+  description?: string
+  footerClassName?: string
+  headerClassName?: string
+  contentClassName?: string
+  titleClassName?: string
 }
 
-const Card: React.FC<ICardProps> = ({ children, title, className, ...restProps }) => {
+const Card: React.FC<ICardProps> = ({
+  children,
+  title,
+  className,
+  description,
+  footerClassName,
+  headerClassName,
+  contentClassName,
+  titleClassName,
+  ...restProps
+}) => {
   return (
     <CardPrimitive
       className={cn(
@@ -20,10 +36,15 @@ const Card: React.FC<ICardProps> = ({ children, title, className, ...restProps }
         className
       )}
     >
-      <CardHeader>
-        <CardTitle>{title}</CardTitle>
+      <CardHeader className={headerClassName}>
+        <CardTitle className={`text-xl ${titleClassName}`}>{title}</CardTitle>
       </CardHeader>
-      <CardContent>{children}</CardContent>
+      <CardContent className={`${contentClassName}`}>{children}</CardContent>
+      <CardFooter
+        className={`text-xs dark:text-gray-700 leading-relaxed text-gray-400 ${footerClassName}`}
+      >
+        {description}
+      </CardFooter>
     </CardPrimitive>
   )
 }

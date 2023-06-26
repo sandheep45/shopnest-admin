@@ -23,17 +23,6 @@ const FormInput: React.FC<IFormInputProps> = ({ label, description, ...props }) 
     if (type === "number") return field.onChange(e.target.valueAsNumber)
     if (type === "checkbox") return field.onChange(e.target.checked)
     if (type === "date" || type === "time") return field.onChange(e.target.valueAsDate)
-    if (type === "file" && accept === "image/*") {
-      const file = e.target.files?.[0]
-      if (!file) return
-      const reader = new FileReader()
-      reader.readAsDataURL(file)
-      reader.onload = (e) => {
-        field.onChange(reader.result)
-      }
-
-      return
-    }
 
     return field.onChange(e.target.value)
   }
@@ -47,11 +36,11 @@ const FormInput: React.FC<IFormInputProps> = ({ label, description, ...props }) 
           <FormLabel className="dark:text-gray-400">{label}</FormLabel>
           <FormControl>
             <Input
+              {...props}
+              {...field}
               disabled={isSubmitting}
               placeholder={props.placeholder}
-              {...field}
               onChange={(e) => onChangeHandler(e, field, props.type, props.accept)}
-              {...props}
             />
           </FormControl>
           <FormDescription>{description}</FormDescription>

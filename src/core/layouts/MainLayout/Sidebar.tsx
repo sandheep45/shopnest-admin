@@ -47,7 +47,7 @@ const Sidebar = () => {
   const router = useRouter()
   return (
     <div className="relative">
-      <aside className="p-5 hidden md:block w-56 lg:w-64 dark:bg-[#1e1e2d] dark:text-gray-500 h-screen transition-all duration-300">
+      <aside className="p-5 hidden md:block w-56 lg:w-64 dark:bg-[#1e1e2d] dark:text-gray-500 h-screen">
         <nav className="flex flex-col w-full gap-5">
           {routes.map((route, index) => {
             return (

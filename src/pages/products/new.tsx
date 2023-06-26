@@ -169,7 +169,7 @@ const NewProductPage = () => {
           <FormInput
             type="file"
             accept="image/*"
-            className="border text-gray-200"
+            className="border text-gray-200 cursor-pointer"
             name="Media.create.url"
             label="Producr Image"
             placeholder="Producr Image"
@@ -178,15 +178,15 @@ const NewProductPage = () => {
             type="text"
             className="border text-gray-200"
             name="VariantOptions.create.name"
-            label="VariantOptions"
-            placeholder="VariantOptions"
+            label="VariantOptions Name"
+            placeholder="VariantOptions Name"
           />
           <FormInput
             type="text"
             className="border text-gray-200"
             name="VariantOptions.create.value"
-            label="VariantOptions"
-            placeholder="VariantOptions"
+            label="VariantOptions Value"
+            placeholder="VariantOptions Value"
           />
           <Button className="border text-gray-200 dark:text-gray-700" type="submit">
             Create Category

@@ -55,7 +55,7 @@ const ProductLoadingTable = () => {
                   </div>
                 </div>
               </TableCell>
-              <TableCell className="flex flex-col gap-3">
+              <TableCell className="flex flex-col gap-3 items-center justify-center">
                 <Skeleton className="h-4 w-64 lg:w-[280px]" />
                 <Skeleton className="h-4 w-64 lg:w-[280px]" />
                 <Skeleton className="h-4 w-64 lg:w-[80px]" />

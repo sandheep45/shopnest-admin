@@ -1,5 +1,6 @@
-import { SimpleRolesIsAuthorized } from "@blitzjs/auth"
 import { User } from "db"
+
+import { SimpleRolesIsAuthorized } from "@blitzjs/auth"
 
 export type Role = "ADMIN" | "USER"
 
@@ -9,6 +10,7 @@ declare module "@blitzjs/auth" {
     PublicData: {
       userId: User["id"]
       role: Role
+      imageUrl: string
     }
   }
 }

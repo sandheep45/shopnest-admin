@@ -4,7 +4,7 @@ import { PropsWithoutRef, ReactNode, useState } from "react"
 import { useForm, UseFormProps } from "react-hook-form"
 import { z } from "zod"
 
-import { DevTool } from "@hookform/devtools"
+// import { DevTool } from "@hookform/devtools"
 import { zodResolver } from "@hookform/resolvers/zod"
 
 import { FormProvider } from "../common/Form"
@@ -64,7 +64,7 @@ const Form = <S extends z.ZodType<any, any>>({
         </form>
       </FormProvider>
 
-      <DevTool control={ctx.control} />
+      {/* <DevTool control={ctx.control} /> */}
     </>
   )
 }
