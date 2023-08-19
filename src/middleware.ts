@@ -4,7 +4,7 @@ export default function middleware(req: NextRequest) {
   const path = req.nextUrl.pathname;
   const session = !!req.cookies.get("next-auth.session-token");
 
-  console.log("Test Middleware", path, session, req.url);
+  console.log("Test Middleware", path, session, req.url, req.cookies.getAll());
 
   if (!session) {
     return NextResponse.redirect(
