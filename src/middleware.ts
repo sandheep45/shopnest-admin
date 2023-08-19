@@ -4,6 +4,8 @@ export default function middleware(req: NextRequest) {
   const path = req.nextUrl.pathname;
   const session = !!req.cookies.get("next-auth.session-token");
 
+  console.log("Test Middleware", path, session, req.url);
+
   if (!session) {
     return NextResponse.redirect(
       new URL(`/auth/signin?callbackUrl=${path}&error=Unauthenticated`, req.url)
