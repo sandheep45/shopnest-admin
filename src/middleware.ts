@@ -1,8 +1,10 @@
-import { type NextRequest, NextResponse } from 'next/server';
+import { type NextRequest, NextResponse } from "next/server";
 
 export default function middleware(req: NextRequest) {
   const path = req.nextUrl.pathname;
-  const session = !!req.cookies.get("next-auth.session-token");
+  const session =
+    !!req.cookies.get("next-auth.session-token") ||
+    !!req.cookies.get("__Secure-next-auth.session-token");
 
   console.log("Test Middleware", path, session, req.url, req.cookies.getAll());
 
@@ -19,7 +21,7 @@ export const config = {
   matcher: [
     "/((?!auth|svg|images|api|_next/static|_next/image|favicon.ico).*)",
     "/",
-    "/en"
+    "/en",
   ],
   // matcher: ["/((?!auth|svg|images|api).*)"],
 };
