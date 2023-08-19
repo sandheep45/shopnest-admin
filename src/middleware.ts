@@ -17,8 +17,9 @@ export default function middleware(req: NextRequest) {
 export const config = {
   // matcher: ["/profile"],
   matcher: [
-    "/((?!auth|svg|images|api|_next/static|_next/image|favicon.ico|en).*)",
+    "/((?!auth|svg|images|api|_next/static|_next/image|favicon.ico).*)",
     "/",
+    "/en"
   ],
   // matcher: ["/((?!auth|svg|images|api).*)"],
 };
