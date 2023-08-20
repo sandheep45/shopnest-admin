@@ -1,10 +1,11 @@
 "use client";
 
+import React, { useEffect } from 'react';
+
 import { type NextPage } from 'next';
-import { signIn } from 'next-auth/react';
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useEffect } from 'react';
+import { signIn } from 'next-auth/react';
 
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/components/ui/use-toast';

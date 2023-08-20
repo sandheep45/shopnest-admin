@@ -1,8 +1,8 @@
-import { z } from 'zod';
+import { z } from "zod";
 
-import { Status } from '@prisma/client';
+import { Status } from "@prisma/client";
 
-import { CreateMediaSchema } from './media';
+import { CreateMediaSchema } from "./media";
 
 export const CreateVariantSchema = z.object({
   description: z

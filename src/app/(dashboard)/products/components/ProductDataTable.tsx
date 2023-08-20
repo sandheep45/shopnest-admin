@@ -1,16 +1,19 @@
 "use client";
 
+import React from 'react';
+
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
+
+import type { ColumnDef } from '@tanstack/react-table';
+
+import type { Media, Product } from '@prisma/client';
 
 import { Checkbox } from '@/components/ui/checkbox';
 import { DataTable } from '@/components/ui/data-table';
 import StarRating from '@/components/utils/StarRating';
 import StatusBadge from '@/components/utils/StatusBadge';
 import TableAction from '@/components/utils/TableAction';
-import type { Media, Product } from '@prisma/client';
-import type { ColumnDef } from '@tanstack/react-table';
 
 export interface IProduct extends Product {
   Media: Media | null;

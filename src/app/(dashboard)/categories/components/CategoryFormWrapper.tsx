@@ -2,8 +2,9 @@
 
 import React from "react";
 
-import { CategorySchema } from "@/schema/category";
 import type { Category, Mediatype, Tags } from "@prisma/client";
+
+import { CategorySchema } from "@/schema/category";
 
 import CategoryForm from "./CategoryForm";
 

@@ -2,11 +2,11 @@
 
 import { type PropsWithoutRef, type ReactNode, useState } from "react";
 import { useForm, type UseFormProps } from "react-hook-form";
+// import { DevTool } from "@hookform/devtools"
+import { zodResolver } from "@hookform/resolvers/zod";
 import type { z } from "zod";
 
 import { Form } from "@/components/ui/form";
-// import { DevTool } from "@hookform/devtools"
-import { zodResolver } from "@hookform/resolvers/zod";
 
 export interface FormProps<S extends z.ZodType<any, any>>
   extends Omit<PropsWithoutRef<JSX.IntrinsicElements["form"]>, "onSubmit"> {

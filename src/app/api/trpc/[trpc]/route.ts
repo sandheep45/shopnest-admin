@@ -20,10 +20,11 @@
 
 // export { handler as GET, handler as POST };
 
-import { env } from '@/env.mjs';
-import { appRouter } from '@/server/api/root';
-import { createTRPCContext } from '@/server/api/trpc';
-import { fetchRequestHandler } from '@trpc/server/adapters/fetch';
+import { fetchRequestHandler } from "@trpc/server/adapters/fetch";
+
+import { env } from "@/env.mjs";
+import { appRouter } from "@/server/api/root";
+import { createTRPCContext } from "@/server/api/trpc";
 
 const handler = (request: Request) => {
   console.log(`incoming request ${request.url}`);
