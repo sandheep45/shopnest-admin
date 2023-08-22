@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { prisma } from '@/server/db';
-
 import type { NextPage } from "next";
+
+import { prisma } from '@/server/db';
 interface PageProps {
   params: Params;
   searchParams: SearchParams;

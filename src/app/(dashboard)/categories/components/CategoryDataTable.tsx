@@ -1,15 +1,18 @@
 "use client";
 
+import React from 'react';
+
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
+
+import type { ColumnDef } from '@tanstack/react-table';
+
+import type { Category, Media } from '@prisma/client';
 
 import { Checkbox } from '@/components/ui/checkbox';
 import { DataTable } from '@/components/ui/data-table';
 import StatusBadge from '@/components/utils/StatusBadge';
 import TableAction from '@/components/utils/TableAction';
-import type { Category, Media } from '@prisma/client';
-import type { ColumnDef } from '@tanstack/react-table';
 
 interface ICategory extends Category {
   Media: Media | null;

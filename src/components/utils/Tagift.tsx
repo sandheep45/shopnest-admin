@@ -3,12 +3,14 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 
-import useSearchableTags from '@/hooks/useSearchableTags';
 import { Cross2Icon } from '@radix-ui/react-icons';
+
+import useSearchableTags from '@/hooks/useSearchableTags';
 
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { ScrollArea } from '../ui/scroll-area';
+
 import Card from './Card';
 
 interface ITagifyProps extends React.HTMLAttributes<HTMLDivElement> {

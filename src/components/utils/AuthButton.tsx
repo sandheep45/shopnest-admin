@@ -1,6 +1,7 @@
 "use client";
-import { signIn } from 'next-auth/react';
 import React from 'react';
+
+import { signIn } from 'next-auth/react';
 
 import { Button } from '../ui/button';
 

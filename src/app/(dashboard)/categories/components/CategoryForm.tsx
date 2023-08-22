@@ -3,6 +3,8 @@
 import React from "react";
 import type { z } from "zod";
 
+import type { Tags } from "@prisma/client";
+
 import { Button } from "@/components/ui/button";
 import { SelectItem } from "@/components/ui/select";
 import CardWrapper from "@/components/utils/Card";
@@ -12,7 +14,6 @@ import FormSelect from "@/components/utils/FormElements/FormSelect";
 import FormTextArea from "@/components/utils/FormElements/FormTextArea";
 import Tagify from "@/components/utils/Tagift";
 import ThumbnailCard from "@/components/utils/ThumbnailCard";
-import type { Tags } from "@prisma/client";
 
 interface Props<S extends z.ZodType<any, any>> {
   initialValues: z.infer<S>;

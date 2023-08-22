@@ -1,12 +1,12 @@
 "use client";
 
 import React from 'react';
+import { useFormContext } from 'react-hook-form';
 
 import { Checkbox } from '@/components/ui/checkbox';
 import {
     FormControl, FormDescription, FormField, FormItem, FormLabel,
 } from '@/components/ui/form';
-import { useFormContext } from 'react-hook-form';
 
 interface IFormCheckboxProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
