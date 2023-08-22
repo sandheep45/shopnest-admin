@@ -57,6 +57,10 @@ model Product {
     description String
     status      Status
     rating      Int
+    width       Int
+    height      Int
+    length      Int
+    weight      Int
 
     VariantOptions VariantOptions[]
     MetaData       MetaData[]
@@ -83,8 +87,8 @@ model Variant {
     Media           Media[]
     VariantMetaData MetaData[]
 
-    Product   Product? @relation(fields: [productId], references: [id], onDelete: Cascade)
-    productId String?  @db.ObjectId
+    Product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+    productId String  @db.ObjectId
 }
 
 model VariantOptions {
