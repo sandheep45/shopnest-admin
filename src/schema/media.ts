@@ -1,6 +1,6 @@
-import { z } from 'zod';
+import { z } from "zod";
 
-import { Mediatype } from '@prisma/client';
+import { Mediatype } from "@prisma/client";
 
 export const CreateMediaSchema = z.object({
   type: z.nativeEnum(Mediatype).default(Mediatype.IMAGE),

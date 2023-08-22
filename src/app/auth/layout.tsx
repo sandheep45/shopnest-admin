@@ -1,7 +1,8 @@
-import { getServerSession } from 'next-auth';
+import React from 'react';
+
 import Image from 'next/image';
 import { redirect } from 'next/navigation';
-import React from 'react';
+import { getServerSession } from 'next-auth';
 
 import ThemeToggleButton from '@/components/utils/ThemeToggleButton';
 import { authOptions } from '@/server/auth';

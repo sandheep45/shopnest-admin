@@ -2,12 +2,12 @@
 
 import React, { useEffect, useState } from "react";
 
+import type { Mediatype, Status, Tags } from "@prisma/client";
+
 import Loading from "@/components/ui/loading";
 import { CreateCategorySchema } from "@/schema/category";
 
 import CategoryForm from "../components/CategoryForm";
-
-import type { Mediatype, Status, Tags } from "@prisma/client";
 
 const initialValues = {
   description: "",

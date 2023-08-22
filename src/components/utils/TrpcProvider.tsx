@@ -1,12 +1,12 @@
 "use client";
 
 import { useState } from 'react';
-import superjson from 'superjson';
-
-import { trpc } from '@/utils/trpc';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { getFetch, httpBatchLink, loggerLink } from '@trpc/client';
+import superjson from 'superjson';
+
+import { trpc } from '@/utils/trpc';
 
 const getBaseUrl = () => {
   if (typeof window !== "undefined") return ""; // browser should use relative url

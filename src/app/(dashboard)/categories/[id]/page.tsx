@@ -1,5 +1,6 @@
-import type { NextPage } from "next";
 import React from "react";
+
+import type { NextPage } from "next";
 
 import { prisma } from "@/server/db";
 

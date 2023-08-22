@@ -1,7 +1,8 @@
 import React from 'react';
 
-import { cn } from '@/lib/utils';
 import { Status } from '@prisma/client';
+
+import { cn } from '@/lib/utils';
 
 import { Badge } from '../ui/badge';
 
