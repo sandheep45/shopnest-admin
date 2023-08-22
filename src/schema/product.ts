@@ -1,8 +1,23 @@
-import { z } from 'zod';
+import { z } from "zod";
 
-import { Status } from '@prisma/client';
+import { Status } from "@prisma/client";
 
-import { CreateMediaSchema } from './media';
+import { CreateMediaSchema } from "./media";
+
+export const ProductSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  description: z.string(),
+  tags: z.string(),
+  status: z.nativeEnum(Status),
+  rating: z.number(),
+  width: z.number(),
+  height: z.number(),
+  length: z.number(),
+  weight: z.number(),
+  categoryId: z.string(),
+  imageUrl: z.string(),
+});
 
 export const CreateVariantSchema = z.object({
   description: z
