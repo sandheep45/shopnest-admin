@@ -17,8 +17,6 @@ interface Props<S extends z.ZodType<any, any>> {
 
 export default function ProductForm<S extends z.ZodType<any, any>>({
   initialValues,
-  tags,
-  categories,
   schema,
 }: Props<S>) {
   return (
