@@ -1,9 +1,11 @@
 "use client";
 
-import FormProvider from "@/components/utils/FormElements/FormProvider";
-import type { Tags } from "@prisma/client";
 import React from "react";
 import type { z } from "zod";
+
+import type { Tags } from "@prisma/client";
+
+import FormProvider from "@/components/utils/FormElements/FormProvider";
 
 interface Props<S extends z.ZodType<any, any>> {
   initialValues: z.infer<S>;
