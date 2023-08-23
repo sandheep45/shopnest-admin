@@ -5,12 +5,12 @@ import type { z } from "zod";
 
 import type { Tags } from "@prisma/client";
 
-import { ProductSchema } from "@/schema/product";
+import { ProductSchemaToReadDB } from "@/schema/product";
 
 import ProductForm from "./ProductForm";
 
 interface Props {
-  product: z.infer<typeof ProductSchema>;
+  product: z.infer<typeof ProductSchemaToReadDB>;
   tags: Tags[];
   categories: {
     label: string;
@@ -23,7 +23,7 @@ const ProductFormWrapper: React.FC<Props> = ({ categories, product, tags }) => {
     <ProductForm
       categories={categories}
       tags={tags}
-      schema={ProductSchema}
+      schema={ProductSchemaToReadDB}
       initialValues={product}
     />
   );

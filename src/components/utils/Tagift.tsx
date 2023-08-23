@@ -1,17 +1,18 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from 'react';
-import { useFormContext } from 'react-hook-form';
+import React, { useEffect, useRef, useState } from "react";
+import { useFormContext } from "react-hook-form";
 
-import { Cross2Icon } from '@radix-ui/react-icons';
+import { Cross2Icon } from "@radix-ui/react-icons";
 
-import useSearchableTags from '@/hooks/useSearchableTags';
+import useSearchableTags from "@/hooks/useSearchableTags";
 
-import { Button } from '../ui/button';
-import { Input } from '../ui/input';
-import { ScrollArea } from '../ui/scroll-area';
+import { Button } from "../ui/button";
+import { FormLabel, FormMessage } from "../ui/form";
+import { Input } from "../ui/input";
+import { ScrollArea } from "../ui/scroll-area";
 
-import Card from './Card';
+import Card from "./Card";
 
 interface ITagifyProps extends React.HTMLAttributes<HTMLDivElement> {
   className?: string;
@@ -21,7 +22,7 @@ interface ITagifyProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const Tagify: React.FC<ITagifyProps> = (props) => {
-  const { register, setValue } = useFormContext();
+  const { register, setValue, formState } = useFormContext();
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [showSuggestion, setShowSuggestion] = useState(false);
   const {
@@ -50,7 +51,7 @@ const Tagify: React.FC<ITagifyProps> = (props) => {
 
   useEffect(() => {
     setValue("tags", selectedTags.map((tag) => tag.label).join(", "));
-  }, [selectedTags, setValue])
+  }, [selectedTags, setValue]);
 
   function focusInputOnClickDiv() {
     if (inputRef.current) {
@@ -60,6 +61,7 @@ const Tagify: React.FC<ITagifyProps> = (props) => {
 
   return (
     <div className="flex w-full flex-col gap-1">
+      <FormLabel className="py-2">{props.title}</FormLabel>
       <div className="flex w-full flex-wrap rounded-md border border-gray-300 p-2 dark:border-gray-700 dark:bg-[#1e1e2d] dark:text-gray-300">
         <div onClick={focusInputOnClickDiv} className="flex w-full flex-wrap">
           {selectedTags.map((option) => (
@@ -69,7 +71,7 @@ const Tagify: React.FC<ITagifyProps> = (props) => {
             >
               {option.label}
               <Button
-                className="p-0 h-auto w-auto"
+                className="h-auto w-auto p-0"
                 variant="ghost"
                 size="icon"
                 onClick={() => handleRemoveTag(option.id)}
@@ -90,10 +92,13 @@ const Tagify: React.FC<ITagifyProps> = (props) => {
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
           />
+          {formState.errors.root?.message && (
+            <FormMessage>{formState.errors.root?.message}</FormMessage>
+          )}
           {showSuggestion && filteredOptions.length > 0 && (
             <Card
               onClick={(e) => e.stopPropagation()}
-              className="absolute left-0 top-[50px] z-[7] w-full flex items-center justify-center flex-col gap-3"
+              className="absolute left-0 top-[50px] z-[7] flex w-full flex-col items-center justify-center gap-3"
             >
               <button
                 onClick={() => setShowSuggestion(false)}

@@ -67,11 +67,11 @@ model Product {
     CustometReview CustomerReview[]
     Variant        Variant[]
 
-    mediaId String? @db.ObjectId
-    Media   Media?  @relation(fields: [mediaId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+    mediaId String @db.ObjectId
+    Media   Media  @relation(fields: [mediaId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
-    Category   Category? @relation(fields: [categoryId], references: [id], onDelete: Cascade)
-    categoryId String?   @db.ObjectId
+    Category   Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+    categoryId String   @db.ObjectId
 }
 
 model Variant {
@@ -96,8 +96,8 @@ model VariantOptions {
     name  String
     value String
 
-    productId String?  @db.ObjectId
-    Product   Product? @relation(fields: [productId], references: [id])
+    productId String  @db.ObjectId
+    Product   Product @relation(fields: [productId], references: [id])
 }
 
 model MetaData {
@@ -123,8 +123,8 @@ model CustomerReview {
     rating    Int
     createdAt DateTime @default(now())
 
-    productId String?  @db.ObjectId
-    Product   Product? @relation(fields: [productId], references: [id], onDelete: Cascade)
+    productId String  @db.ObjectId
+    Product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
 
     userId String? @db.ObjectId
     User   User?   @relation(fields: [userId], references: [id])

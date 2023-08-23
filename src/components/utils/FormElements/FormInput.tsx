@@ -16,17 +16,20 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { cn } from "@/lib/utils";
 
 interface IFormInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   name: string;
   label: string;
   description?: string;
   type: string;
+  isLabelHidden?: boolean;
 }
 
 const FormInput: React.FC<IFormInputProps> = ({
   label,
   description,
+  isLabelHidden,
   ...props
 }) => {
   const { control } = useFormContext();
@@ -51,7 +54,12 @@ const FormInput: React.FC<IFormInputProps> = ({
       name={props.name}
       render={({ field, formState: { isSubmitting, errors } }) => (
         <FormItem>
-          <FormLabel className="dark:text-gray-400">{label}</FormLabel>
+          <FormLabel
+            className={cn("dark:text-gray-400", isLabelHidden && "sr-only")}
+          >
+            {label}
+          </FormLabel>
+
           <FormControl>
             <Input
               {...props}
