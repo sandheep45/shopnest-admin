@@ -34,7 +34,7 @@ const FormProvider = <S extends z.ZodType<any, any>>({
   ...props
 }: FormProps<S>) => {
   const ctx = useForm<z.infer<S>>({
-    mode: "onBlur",
+    mode: "all",
     resolver: schema ? zodResolver(schema) : undefined,
     defaultValues: initialValues,
   });

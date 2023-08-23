@@ -2,9 +2,9 @@ import { z } from "zod";
 
 import { Status } from "@prisma/client";
 
-import { CreateMediaSchema } from "./media";
+import { CreateMediaSchema, MediaSchema } from "./media";
 
-export const ProductSchema = z.object({
+export const ProductSchemaToReadDB = z.object({
   id: z.string(),
   name: z.string(),
   description: z.string(),
@@ -16,7 +16,7 @@ export const ProductSchema = z.object({
   length: z.number(),
   weight: z.number(),
   categoryId: z.string(),
-  imageUrl: z.string(),
+  Media: MediaSchema,
 });
 
 export const CreateVariantSchema = z.object({

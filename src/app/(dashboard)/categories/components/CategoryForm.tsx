@@ -12,8 +12,10 @@ import FormInput from "@/components/utils/FormElements/FormInput";
 import FormProvider from "@/components/utils/FormElements/FormProvider";
 import FormSelect from "@/components/utils/FormElements/FormSelect";
 import FormTextArea from "@/components/utils/FormElements/FormTextArea";
+import StatusColorIndicator from "@/components/utils/StatusColorIndicator";
 import Tagify from "@/components/utils/Tagift";
 import ThumbnailCard from "@/components/utils/ThumbnailCard";
+import { status } from "@/constants/status";
 
 interface Props<S extends z.ZodType<any, any>> {
   initialValues: z.infer<S>;
@@ -54,15 +56,20 @@ export default function CategoryForm<S extends z.ZodType<any, any>>({
           />
         </CardWrapper>
 
-        <CardWrapper headerClassName="px-6 py-3" title="Status">
+        <CardWrapper
+          className="relative"
+          headerClassName="px-6 py-3"
+          title="Status"
+        >
+          <StatusColorIndicator />
           <FormSelect
             description="Set the category status."
             name="status"
             label="Status"
             isLabelHidden
           >
-            {[{ label: "Active", value: "PUBLISHED" }].map((item) => (
-              <SelectItem value={item.value} key={item.label}>
+            {status.map((item) => (
+              <SelectItem value={item.value} key={`${item.value}${item.label}`}>
                 {item.label}
               </SelectItem>
             ))}

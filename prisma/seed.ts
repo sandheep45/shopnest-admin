@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import { PrismaClient } from "@prisma/client";
-import { hash } from "bcryptjs";
 import { faker } from "@faker-js/faker";
+import { hash } from "bcryptjs";
+
+import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
@@ -82,8 +83,62 @@ const updateProduct = async () => {
   }
 };
 
+const addMetaData = async () => {
+  const variants = await prisma.variant.findMany({
+    where: {
+      VariantMetaData: {
+        none: {},
+      },
+    },
+  });
+
+  for (const variant of variants) {
+    await prisma.variant.update({
+      where: { id: variant.id },
+      data: {
+        VariantMetaData: {
+          createMany: {
+            data: Array.from({ length: getRandomInt(1, 20) }).map(() => ({
+              description: faker.lorem.paragraph(),
+              keywords: Array.from({ length: getRandomInt(1, 8) }, () =>
+                faker.lorem.word()
+              ).join(", "),
+              title: faker.lorem.words(5),
+            })),
+          },
+        },
+      },
+    });
+  }
+};
+
+const createVariants = async () => {
+  const products = await prisma.product.findMany();
+
+  for (const product of products) {
+    await prisma.product.update({
+      where: { id: product.id },
+      data: {
+        Variant: {
+          createMany: {
+            data: Array.from({ length: getRandomInt(25, 40) }).map(() => ({
+              barcode: faker.number.int({ min: 100, max: 1000 }),
+              price: faker.number.int({ min: 100, max: 1000 }),
+              description: faker.lorem.paragraph(),
+              sku: faker.number.int({ min: 100, max: 1000 }),
+              inWareHouseQuantity: faker.number.int({ min: 1, max: 100 }),
+              onSelfQuantity: faker.number.int({ min: 1, max: 100 }),
+              taxPercent: faker.number.int({ min: 1, max: 100 }),
+            })),
+          },
+        },
+      },
+    });
+  }
+};
+
 async function main() {
-  await updateProduct();
+  await addMetaData();
 }
 
 main()
