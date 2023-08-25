@@ -20,6 +20,7 @@ import FormInput from "@/components/utils/FormElements/FormInput";
 import { api } from "@/utils/api";
 
 import MetaDataCard from "./MetaDataCard";
+import VariantsCard from "./VariantsCard";
 
 const AdvancedSection = () => {
   const [currentVariantId, setCurrentVariantId] = useState("");
@@ -149,6 +150,8 @@ const AdvancedSection = () => {
             </div>
           </CardWrapper>
         </div>
+
+        <VariantsCard />
 
         <MetaDataCard variantId={currentVariantId} />
       </div>

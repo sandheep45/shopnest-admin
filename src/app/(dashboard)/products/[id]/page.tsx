@@ -30,6 +30,12 @@ const Page: NextPage<PageProps> = async ({ params }) => {
             url: true,
           },
         },
+        VariantOptions: {
+          select: {
+            name: true,
+            value: true,
+          },
+        },
       },
     }),
     prisma.tags.findMany(),
