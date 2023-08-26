@@ -41,8 +41,22 @@ export const customerReviewsRouter = createTRPCRouter({
         }),
       ]);
 
+      const mappedReviews = reviews.map((review) => ({
+        User: {
+          id: review.User?.id,
+          Media: {
+            url: review.User?.Media?.url,
+          },
+          name: review.User?.name,
+          image: review.User?.image,
+        },
+        rating: review.rating,
+        comment: review.comment,
+        createdAt: review.createdAt.toISOString(),
+      }));
+
       return {
-        reviews,
+        reviews: mappedReviews,
         count,
         avgRating:
           rating.reduce((acc, curr) => acc + curr.rating, 0) / rating.length,

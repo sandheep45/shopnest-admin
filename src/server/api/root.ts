@@ -4,6 +4,7 @@ import { customerReviewsRouter } from "./routers/customerReviews";
 import { exampleRouter } from "./routers/example";
 import { metadataRouter } from "./routers/metadata";
 import { productRouter } from "./routers/product";
+import { variantOptionsRouter } from "./routers/variantOprions";
 import { variantsRouter } from "./routers/variants";
 
 /**
@@ -17,6 +18,7 @@ export const appRouter = createTRPCRouter({
   metadata: metadataRouter,
   product: productRouter,
   variants: variantsRouter,
+  variantOptions: variantOptionsRouter,
 });
 
 // export type definition of API

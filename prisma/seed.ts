@@ -68,18 +68,40 @@ const createUser = async () => {
 };
 
 const updateProduct = async () => {
-  const products = await prisma.product.findMany();
+  const products = await prisma.product.findMany({
+    include: {
+      VariantOptions: true,
+    },
+  });
 
   for (const product of products) {
-    await prisma.product.update({
-      where: { id: product.id },
-      data: {
-        width: faker.number.float({ min: 10, max: 100, precision: 0.001 }),
-        height: faker.number.float({ min: 10, max: 100, precision: 0.001 }),
-        length: faker.number.float({ min: 10, max: 100, precision: 0.001 }),
-        weight: faker.number.float({ min: 10, max: 100, precision: 0.001 }),
+    const variantIds = await prisma.variant.findMany({
+      where: {
+        productId: product.id,
+      },
+      select: {
+        id: true,
       },
     });
+
+    for (const variantId of variantIds) {
+      const options = product.VariantOptions.map((option) => {
+        return {
+          name: option.name,
+          value: getRandomValue(option.value.split(", ")) as string,
+        };
+      });
+      await prisma.variant.update({
+        where: { id: variantId.id },
+        data: {
+          options: {
+            createMany: {
+              data: options,
+            },
+          },
+        },
+      });
+    }
   }
 };
 
@@ -138,7 +160,34 @@ const createVariants = async () => {
 };
 
 async function main() {
-  await addMetaData();
+  const variant = await prisma.variant.findMany({
+    where: {
+      productId: "64730d29edd14ce327603f93",
+      AND: [
+        {
+          options: {
+            every: {
+              name: "Color",
+              value: "blue",
+            },
+          },
+        },
+        {
+          options: {
+          every: {
+            name: "Size",
+            value: "XS",
+          }
+          }
+        }
+      ],
+    },
+    include: {
+      options: true,
+    },
+  });
+
+  console.log(variant.length);
 }
 
 main()

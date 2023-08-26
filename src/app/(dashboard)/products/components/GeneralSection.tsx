@@ -43,7 +43,15 @@ const GeneralSection = () => {
         contentClassName="flex flex-col gap-5"
         className="h-fit py-6"
         title="Variations"
-      ></CardWrapper>
+      >
+        <FormInput
+          label="Variations"
+          name="VariantOptions.name"
+          type="text"
+          className="w-auto border"
+          placeholder="Color"
+        />
+      </CardWrapper>
 
       <CardWrapper
         headerClassName="px-6 py-2"

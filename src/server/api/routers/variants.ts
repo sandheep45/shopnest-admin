@@ -24,4 +24,47 @@ export const variantsRouter = createTRPCRouter({
       });
       return variants;
     }),
+
+  getVariantByOptions: protectedProcedure
+    .input(
+      z.object({
+        productId: z.string(),
+        options: z.array(
+          z.object({
+            name: z.string(),
+            value: z.string(),
+          })
+        ),
+      })
+    )
+    .query(async ({ ctx, input }) => {
+      const options = input.options
+        .filter((option) => option.value)
+        .map((option) => {
+          return {
+            options: {
+              some: {
+                name: option.name,
+                value: option.value,
+              },
+            },
+          };
+        });
+
+      const variant = await ctx.prisma.variant.findFirst({
+        where: {
+          AND: [
+            {
+              productId: input.productId,
+            },
+            ...options,
+          ],
+        },
+        include: {
+          options: true,
+        },
+      });
+
+      return variant;
+    }),
 });
