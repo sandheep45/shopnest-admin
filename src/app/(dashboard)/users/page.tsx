@@ -1,17 +1,21 @@
-import React from 'react';
+import React from "react";
 
-import { type NextPage } from 'next';
-import Link from 'next/link';
+import { type NextPage } from "next";
+import Link from "next/link";
 
-import { Button, buttonVariants } from '@/components/ui/button';
+import { Button, buttonVariants } from "@/components/ui/button";
 import {
-    DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger
-} from '@/components/ui/dropdown-menu';
-import { Input } from '@/components/ui/input';
-import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
-import { prisma } from '@/server/db';
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+import { prisma } from "@/server/db";
 
-import UserDataTable from './components/UserDataTable';
+import UserDataTable from "./components/UserDataTable";
 
 interface IProps {
   searchParams: {
@@ -35,13 +39,18 @@ const Page: NextPage<IProps> = async ({ searchParams }) => {
   ]);
 
   return (
-    <div className="flex flex-col gap-6 w-full">
+    <div className="flex w-full flex-col gap-6">
       <h3 className="text-2xl">Users Listing</h3>
-      <div className="flex flex-col gap-8 w-full relative dark:bg-[#1e1e2d] p-5 rounded-md bg-[#f5f8fa]">
-        <div className="flex justify-between items-center">
-          <Input className="w-auto" />
+      <div className="relative flex w-full flex-col gap-8 rounded-md bg-[#f5f8fa] p-5 dark:bg-[#1e1e2d]">
+        <div className="flex items-center justify-between">
+          <div>
+            <Label className="sr-only" htmlFor="search">
+              Search Bar
+            </Label>
+            <Input className="w-auto" id="search" />
+          </div>
 
-          <div className="flex gap-3 items-center justify-center">
+          <div className="flex items-center justify-center gap-3">
             <DropdownMenu>
               <DropdownMenuTrigger asChild className="">
                 <Button>Action</Button>

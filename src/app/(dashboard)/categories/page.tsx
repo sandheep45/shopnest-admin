@@ -8,6 +8,7 @@ import {
     DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
 import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 import { prisma } from '@/server/db';
 
@@ -39,7 +40,12 @@ const Page: NextPage<IProps> = async ({ searchParams }) => {
       <h3 className="text-2xl">Categories Listing</h3>
       <div className="relative flex w-full flex-col gap-8 rounded-md bg-[#f5f8fa] p-5 dark:bg-[#1e1e2d]">
         <div className="flex items-center justify-between">
-          <Input className="w-auto" />
+          <div>
+            <Label className="sr-only" htmlFor="search">
+              Search Bar
+            </Label>
+            <Input className="w-auto" id="search" />
+          </div>
 
           <div className="flex items-center justify-center gap-3">
             <DropdownMenu>
