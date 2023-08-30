@@ -37,6 +37,8 @@ const MetaDataCard = () => {
     {
       refetchOnWindowFocus: false,
       refetchOnReconnect: false,
+      refetchOnMount: false,
+      staleTime: Infinity,
       enabled: !!productId || !!variantId || !!categoryId,
     }
   );
@@ -47,6 +49,8 @@ const MetaDataCard = () => {
   } = api.metadata.getMetadatabyId.useQuery(currentMetaDataID, {
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
+    refetchOnMount: false,
+    staleTime: Infinity,
     enabled: !!currentMetaDataID,
   });
 
