@@ -1,18 +1,18 @@
 "use client";
 
-import React from 'react';
+import React from "react";
 
-import Image from 'next/image';
-import Link from 'next/link';
+import Image from "next/image";
+import Link from "next/link";
 
-import type { ColumnDef } from '@tanstack/react-table';
+import type { ColumnDef } from "@tanstack/react-table";
 
-import type { Category, Media } from '@prisma/client';
+import type { Category, Media } from "@prisma/client";
 
-import { Checkbox } from '@/components/ui/checkbox';
-import { DataTable } from '@/components/ui/data-table';
-import StatusBadge from '@/components/utils/StatusBadge';
-import TableAction from '@/components/utils/TableAction';
+import { Checkbox } from "@/components/ui/checkbox";
+import { DataTable } from "@/components/ui/data-table";
+import StatusBadge from "@/components/utils/StatusBadge";
+import TableAction from "@/components/utils/TableAction";
 
 interface ICategory extends Category {
   Media: Media | null;
@@ -28,6 +28,7 @@ export const columns: ColumnDef<ICategory>[] = [
     accessorKey: "id",
     header: ({ table }) => (
       <Checkbox
+        aria-label="select-all"
         checked={table.getIsAllPageRowsSelected()}
         onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
         className="mx-3"
@@ -35,6 +36,7 @@ export const columns: ColumnDef<ICategory>[] = [
     ),
     cell: ({ row }) => (
       <Checkbox
+        aria-label={`select-category-${row.original.name}`}
         checked={row.getIsSelected()}
         onCheckedChange={(value) => row.toggleSelected(!!value)}
         className="mx-3"
@@ -45,12 +47,12 @@ export const columns: ColumnDef<ICategory>[] = [
     accessorKey: "name",
     header: () => <div className="text-center">Category Name</div>,
     cell: (info) => (
-      <div className="flex w-32 lg:w-auto items-center gap-4 font-medium">
+      <div className="flex w-32 items-center gap-4 font-medium lg:w-auto">
         <Image
           width={50}
           height={50}
           alt="user-image"
-            src={info.row.original.Media!.url}
+          src={info.row.original.Media!.url}
           className="rounded-md"
         />
         <Link href={`/categories/${info.row.original.id}`} className="truncate">
@@ -63,7 +65,7 @@ export const columns: ColumnDef<ICategory>[] = [
     accessorKey: "description",
     header: () => <div className="text-center">Description</div>,
     cell: (info) => (
-      <div className="text-center font-medium w-64 lg:w-auto">
+      <div className="w-64 text-center font-medium lg:w-auto">
         {info.row.original.description}
       </div>
     ),

@@ -27,6 +27,7 @@ export const columns: ColumnDef<IUser>[] = [
     accessorKey: "id",
     header: ({ table }) => (
       <Checkbox
+        aria-label="select-all"
         checked={table.getIsAllPageRowsSelected()}
         onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
         className="mx-3"
@@ -34,6 +35,7 @@ export const columns: ColumnDef<IUser>[] = [
     ),
     cell: ({ row }) => (
       <Checkbox
+        aria-label={`select-user-${row.original.name}`}
         checked={row.getIsSelected()}
         onCheckedChange={(value) => row.toggleSelected(!!value)}
         className="mx-3"
@@ -44,7 +46,7 @@ export const columns: ColumnDef<IUser>[] = [
     accessorKey: "name",
     header: () => <div className="text-center">Person Name</div>,
     cell: (info) => (
-      <div className="flex items-center gap-4 font-medium w-36 lg:w-auto">
+      <div className="flex w-36 items-center gap-4 font-medium lg:w-auto">
         <Image
           width={50}
           height={50}
@@ -62,7 +64,7 @@ export const columns: ColumnDef<IUser>[] = [
     accessorKey: "email",
     header: () => <div className="text-center">Email</div>,
     cell: ({ row }) => (
-      <div className="text-center font-medium truncate">
+      <div className="truncate text-center font-medium">
         {row.getValue("email")}
       </div>
     ),
@@ -85,7 +87,7 @@ export const columns: ColumnDef<IUser>[] = [
     accessorKey: "createdAt",
     header: () => <div className="text-center">Created At</div>,
     cell: ({ row }) => (
-      <div className="text-center font-medium w-36 xl:w-auto">
+      <div className="w-36 text-center font-medium xl:w-auto">
         {formatDate(row.original.createdAt)}
       </div>
     ),

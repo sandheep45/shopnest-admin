@@ -34,6 +34,7 @@ export const columns: ColumnDef<ICustomerReview>[] = [
     accessorKey: "id",
     header: ({ table }) => (
       <Checkbox
+        aria-label="select-all"
         checked={table.getIsAllPageRowsSelected()}
         onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
         className="mx-3"
@@ -41,6 +42,7 @@ export const columns: ColumnDef<ICustomerReview>[] = [
     ),
     cell: ({ row }) => (
       <Checkbox
+        aria-label={`select-user-${row.original.User.name}`}
         checked={row.getIsSelected()}
         onCheckedChange={(value) => row.toggleSelected(!!value)}
         className="mx-3"
