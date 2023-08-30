@@ -1,7 +1,9 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
+
+import { useParams, useSearchParams } from "next/navigation";
 
 import Loading from "@/components/ui/loading";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -17,17 +19,9 @@ import FormInput from "@/components/utils/FormElements/FormInput";
 import FormTextArea from "@/components/utils/FormElements/FormTextArea";
 import { api } from "@/utils/api";
 
-interface Props {
-  productId?: string;
-  variantId?: string;
-  categoryId?: string;
-}
-
-const MetaDataCard: React.FC<Props> = ({
-  categoryId,
-  productId,
-  variantId,
-}) => {
+const MetaDataCard = () => {
+  const variantId = useSearchParams().get("variantId");
+  const { productId, categoryId } = useParams();
   const { setValue } = useFormContext();
   const [currentMetaDataID, setCurrentMetaDataID] = useState("");
   const {
@@ -36,41 +30,39 @@ const MetaDataCard: React.FC<Props> = ({
     isFetching,
   } = api.metadata.getMetadataIdAndName.useQuery(
     {
-      ...(categoryId && { categoryId }),
-      ...(productId && { productId }),
+      ...(categoryId && { categoryId: categoryId as string }), //categoryId
+      ...(productId && !variantId && { productId: productId as string }), //productId
       ...(variantId && { variantId }),
     },
     {
-      queryKey: [
-        "metadata.getMetadataIdAndName",
-        {
-          ...(categoryId && { categoryId }),
-          ...(productId && { productId }),
-          ...(variantId && { variantId }),
-        },
-      ],
       refetchOnWindowFocus: false,
       refetchOnReconnect: false,
-      enabled: !!categoryId || !!productId || !!variantId,
-      onSuccess: (data) => setCurrentMetaDataID(data[0]?.id ?? ""),
+      enabled: !!productId || !!variantId || !!categoryId,
     }
   );
-  const { isLoading: isMetaDataLoading, isFetching: isMetaDataFetching } =
-    api.metadata.getMetadatabyId.useQuery(currentMetaDataID, {
-      queryKey: ["metadata.getMetadatabyId", currentMetaDataID],
-      refetchOnWindowFocus: false,
-      refetchOnReconnect: false,
-      onSuccess: (data) => setValue("MetaData", data),
-    });
+  const {
+    isLoading: isMetaDataLoading,
+    isFetching: isMetaDataFetching,
+    data,
+  } = api.metadata.getMetadatabyId.useQuery(currentMetaDataID, {
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
+    enabled: !!currentMetaDataID,
+  });
+
+  useEffect(() => {
+    if (data) setValue("MetaData", data);
+  }, [setValue, data]);
+
+  useEffect(() => {
+    if (allMetaData?.[0]?.id) setCurrentMetaDataID(allMetaData[0]?.id);
+  }, [allMetaData]);
 
   return (
     <div className="relative w-full">
       <Loading
         isOpen={
-          isLoading ||
-          isFetching ||
-          isMetaDataFetching ||
-          (currentMetaDataID ? isMetaDataLoading : false)
+          isLoading || isFetching || isMetaDataFetching || isMetaDataLoading
         }
       />
       <Select onValueChange={setCurrentMetaDataID} value={currentMetaDataID}>

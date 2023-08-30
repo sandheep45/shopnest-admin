@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 import { Label } from "@/components/ui/label";
 import Loading from "@/components/ui/loading";
@@ -21,6 +22,7 @@ import { api } from "@/utils/api";
 
 const VariantsCard = () => {
   const { watch, setValue } = useFormContext();
+  const router = useRouter();
   const [options, setOptions] = useState<
     {
       name: string;
@@ -68,12 +70,21 @@ const VariantsCard = () => {
   );
 
   useEffect(() => {
-    if (optionsData) setOptions(optionsData);
+    if (optionsData)
+      setOptions(
+        optionsData.map((options) => ({
+          name: options.name,
+          value: options.value.split(", ")[0] ?? "",
+        }))
+      );
   }, [optionsData]);
 
   useEffect(() => {
-    if (variantData) setValue("Variant", variantData);
-  }, [variantData, setValue]);
+    if (variantData) {
+      setValue("Variant", variantData);
+      router.push(`?variantId=${variantData.id}`);
+    }
+  }, [variantData, setValue, router]);
 
   return (
     <div className="relative w-full">

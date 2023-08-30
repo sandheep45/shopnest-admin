@@ -1,17 +1,11 @@
 import React from "react";
-import { useFormContext } from "react-hook-form";
-import type { z } from "zod";
 
 import { Label } from "@/components/ui/label";
 import CardWrapper from "@/components/utils/Card";
 import FormInput from "@/components/utils/FormElements/FormInput";
 import FormTextArea from "@/components/utils/FormElements/FormTextArea";
-import type { ProductSchemaToReadDB } from "@/schema/product";
-
-import MetaDataCard from "./MetaDataCard";
 
 const GeneralSection = () => {
-  const { watch } = useFormContext<z.infer<typeof ProductSchemaToReadDB>>();
   return (
     <>
       <CardWrapper
@@ -101,8 +95,6 @@ const GeneralSection = () => {
           </p>
         </div>
       </CardWrapper>
-
-      <MetaDataCard productId={watch()?.id || ""} />
     </>
   );
 };

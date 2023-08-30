@@ -12,17 +12,17 @@ interface PageProps {
 }
 
 interface Params {
-  id: string;
+  categoryId: string;
 }
 
 type SearchParams = Record<string, string | string[] | undefined>;
 
 const Page: NextPage<PageProps> = async ({ params }) => {
-  const { id } = params;
+  const { categoryId } = params;
   const [category, tags] = await prisma.$transaction([
     prisma.category.findUnique({
       where: {
-        id: id,
+        id: categoryId,
       },
       include: {
         Media: {

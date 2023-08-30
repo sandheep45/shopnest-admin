@@ -12,6 +12,7 @@ import FormInput from "@/components/utils/FormElements/FormInput";
 import FormProvider from "@/components/utils/FormElements/FormProvider";
 import FormSelect from "@/components/utils/FormElements/FormSelect";
 import FormTextArea from "@/components/utils/FormElements/FormTextArea";
+import MetaDataCard from "@/components/utils/MetaDataCard";
 import StatusColorIndicator from "@/components/utils/StatusColorIndicator";
 import Tagify from "@/components/utils/Tagift";
 import ThumbnailCard from "@/components/utils/ThumbnailCard";
@@ -100,15 +101,8 @@ export default function CategoryForm<S extends z.ZodType<any, any>>({
             description="Set a description to the category for better visibility."
           />
         </CardWrapper>
-        <CardWrapper headerClassName="px-6 py-3" title="Meta Options">
-          <FormInput
-            type="text"
-            className="border"
-            name="meta"
-            label="Meta"
-            placeholder="Name"
-          />
-        </CardWrapper>
+        
+        <MetaDataCard />
 
         <Button type="submit">Submit</Button>
       </div>
