@@ -1,9 +1,10 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { useFormContext } from "react-hook-form";
 
 import { useParams, useSearchParams } from "next/navigation";
+
+import { useFormContext } from "react-hook-form";
 
 import Loading from "@/components/ui/loading";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -17,6 +18,7 @@ import {
 import CardWrapper from "@/components/utils/Card";
 import FormInput from "@/components/utils/FormElements/FormInput";
 import FormTextArea from "@/components/utils/FormElements/FormTextArea";
+
 import { api } from "@/utils/api";
 
 const MetaDataCard = () => {
@@ -24,35 +26,29 @@ const MetaDataCard = () => {
   const { productId, categoryId } = useParams();
   const { setValue } = useFormContext();
   const [currentMetaDataID, setCurrentMetaDataID] = useState("");
-  const {
-    data: allMetaData,
-    isLoading,
-    isFetching,
-  } = api.metadata.getMetadataIdAndName.useQuery(
-    {
-      ...(categoryId && { categoryId: categoryId as string }), //categoryId
-      ...(productId && !variantId && { productId: productId as string }), //productId
-      ...(variantId && { variantId }),
-    },
-    {
+  const { data: allMetaData, isInitialLoading } =
+    api.metadata.getMetadataIdAndName.useQuery(
+      {
+        ...(categoryId && { categoryId: categoryId as string }), //categoryId
+        ...(productId && !variantId && { productId: productId as string }), //productId
+        ...(variantId && { variantId }),
+      },
+      {
+        refetchOnWindowFocus: false,
+        refetchOnReconnect: false,
+        refetchOnMount: false,
+        staleTime: Infinity,
+        enabled: !!productId || !!variantId || !!categoryId,
+      }
+    );
+  const { isInitialLoading: isMetaDataInitialLoading, data } =
+    api.metadata.getMetadatabyId.useQuery(currentMetaDataID, {
       refetchOnWindowFocus: false,
       refetchOnReconnect: false,
       refetchOnMount: false,
       staleTime: Infinity,
-      enabled: !!productId || !!variantId || !!categoryId,
-    }
-  );
-  const {
-    isLoading: isMetaDataLoading,
-    isFetching: isMetaDataFetching,
-    data,
-  } = api.metadata.getMetadatabyId.useQuery(currentMetaDataID, {
-    refetchOnWindowFocus: false,
-    refetchOnReconnect: false,
-    refetchOnMount: false,
-    staleTime: Infinity,
-    enabled: !!currentMetaDataID,
-  });
+      enabled: !!currentMetaDataID,
+    });
 
   useEffect(() => {
     if (data) setValue("MetaData", data);
@@ -64,11 +60,7 @@ const MetaDataCard = () => {
 
   return (
     <div className="relative w-full">
-      <Loading
-        isOpen={
-          isLoading || isFetching || isMetaDataFetching || isMetaDataLoading
-        }
-      />
+      <Loading isOpen={isInitialLoading || isMetaDataInitialLoading} />
       <Select onValueChange={setCurrentMetaDataID} value={currentMetaDataID}>
         <SelectTrigger className="absolute right-5 top-5 w-auto">
           <SelectValue>

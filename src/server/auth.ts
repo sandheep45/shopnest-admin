@@ -8,8 +8,9 @@ import {
 import FacebookProvider from "next-auth/providers/facebook";
 import GoogleProvider from "next-auth/providers/google";
 
-import { env } from "@/env.mjs";
 import { prisma } from "@/server/db";
+
+import { env } from "@/env.mjs";
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`

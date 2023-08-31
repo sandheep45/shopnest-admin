@@ -16,6 +16,7 @@ import FormSelect from "@/components/utils/FormElements/FormSelect";
 import StatusColorIndicator from "@/components/utils/StatusColorIndicator";
 import Tagify from "@/components/utils/Tagift";
 import ThumbnailCard from "@/components/utils/ThumbnailCard";
+
 import { status } from "@/constants/status";
 
 import MetaDataCard from "../../../../components/utils/MetaDataCard";
@@ -171,14 +172,13 @@ export default function ProductForm<S extends z.ZodType<any, any>>({
               <ReviewDataTable />
             </TabsContent>
           )}
-          {initialValues?.id && (
-            <TabsContent
-              className="py-5 data-[state=inactive]:hidden data-[state=inactive]:py-0"
-              value="metadata"
-            >
-              <MetaDataCard />
-            </TabsContent>
-          )}
+
+          <TabsContent
+            className="py-5 data-[state=inactive]:hidden data-[state=inactive]:py-0"
+            value="metadata"
+          >
+            <MetaDataCard />
+          </TabsContent>
         </Tabs>
       </div>
     </FormProvider>

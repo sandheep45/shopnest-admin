@@ -19,18 +19,21 @@ const config = {
       "error",
       {
         groups: [
-          // Packages `react` related packages come first.
           ["^react", "^@?\\w"],
-          //Packages 'next' related packages come second.
           ["^next", "^@?\\w"],
-          //Package '@tanstack/react-table' comes third.
+          ["^next-auth", "^@?\\w"],
+          ["^react-hook-form", "^@?\\w"],
           ["^@tanstack/react-table", "^@?\\w"],
-          // Packages '@prisma/client' related packages come fourth.
           ["^@prisma/client", "^@?\\w"],
-          // Packages '@radix-ui' related packages come then afer.
-          ["^@radix-ui", "^@?\\w"],
-          // Internal Components components, hooks, lib, schema, server, styles, utils comes one after another
-          ["^(@|components|hooks|lib|schema|server|styles|utils)(/.*|$)"],
+          ["^@/radix-ui", "^@?\\w"],
+          ["^@/components", "^@?\\w"],
+          ["^@/constants", "^@?\\w"],
+          ["^@/hooks", "^@?\\w"],
+          ["^@/lib", "^@?\\w"],
+          ["^@/schema", "^@?\\w"],
+          ["^@/server", "^@?\\w"],
+          ["^@/styles", "^@?\\w"],
+          ["^@/utils", "^@?\\w"],
           // Side effect imports.
           ["^\\u0000"],
           // Parent imports. Put `..` last.
