@@ -16,6 +16,7 @@ import MetaDataCard from "@/components/utils/MetaDataCard";
 import StatusColorIndicator from "@/components/utils/StatusColorIndicator";
 import Tagify from "@/components/utils/Tagift";
 import ThumbnailCard from "@/components/utils/ThumbnailCard";
+
 import { status } from "@/constants/status";
 
 interface Props<S extends z.ZodType<any, any>> {

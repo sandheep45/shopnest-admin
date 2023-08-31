@@ -38,9 +38,6 @@ export const CreateVariantSchema = z.object({
     .number()
     .int()
     .min(0, { message: "In warehouse quantity cannot be negative" }),
-  Media: z.object({
-    create: CreateMediaSchema,
-  }),
 });
 
 export const CreateVariantOptionSchema = z.object({

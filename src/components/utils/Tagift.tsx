@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import { useFormContext } from "react-hook-form";
-
 import { Cross2Icon } from "@radix-ui/react-icons";
+
+import { useFormContext } from "react-hook-form";
 
 import useSearchableTags from "@/hooks/useSearchableTags";
 

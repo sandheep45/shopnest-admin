@@ -60,9 +60,6 @@ export const variantsRouter = createTRPCRouter({
             ...options,
           ],
         },
-        include: {
-          options: true,
-        },
       });
 
       return variant;

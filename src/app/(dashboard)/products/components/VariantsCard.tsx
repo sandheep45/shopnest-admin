@@ -1,10 +1,11 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { useFormContext } from "react-hook-form";
 
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
+
+import { useFormContext } from "react-hook-form";
 
 import { Label } from "@/components/ui/label";
 import Loading from "@/components/ui/loading";
@@ -18,11 +19,14 @@ import {
 } from "@/components/ui/select";
 import CardWrapper from "@/components/utils/Card";
 import FormInput from "@/components/utils/FormElements/FormInput";
+import FormTextArea from "@/components/utils/FormElements/FormTextArea";
+
 import { api } from "@/utils/api";
 
 const VariantsCard = () => {
-  const { watch, setValue } = useFormContext();
+  const { setValue } = useFormContext();
   const router = useRouter();
+  const { productId } = useParams();
   const [options, setOptions] = useState<
     {
       name: string;
@@ -30,44 +34,34 @@ const VariantsCard = () => {
     }[]
   >([]);
 
-  const {
-    data: optionsData,
-    isLoading: optionsDataIsLoading,
-    isFetching: optionsDataisFetching,
-  } = api.variantOptions.getOptionsByProductId.useQuery(
-    {
-      productId: watch("id") as string,
-    },
-    {
-      refetchOnMount: false,
-      refetchOnReconnect: false,
-      refetchOnWindowFocus: false,
-      staleTime: Infinity,
-      enabled: !!watch("id"),
-    }
-  );
-  const {
-    data: variantData,
-    isLoading: variantIsLoading,
-    isFetching: variantIsFetching,
-  } = api.variants.getVariantByOptions.useQuery(
-    {
-      productId: watch("id") as string,
-      options,
-    },
-    {
-      refetchOnMount: false,
-      refetchOnReconnect: false,
-      refetchOnWindowFocus: false,
-      queryKey: [
-        "variants.getVariantByOptions",
-        { productId: watch("id") as string, options },
-      ],
-      staleTime: Infinity,
-      enabled:
-        !!watch("id") && options.every(({ value }) => !value.includes(", ")),
-    }
-  );
+  const { data: optionsData, isInitialLoading: optionsDataIsInitaillyLoading } =
+    api.variantOptions.getOptionsByProductId.useQuery(
+      {
+        productId: productId as string,
+      },
+      {
+        refetchOnMount: false,
+        refetchOnReconnect: false,
+        refetchOnWindowFocus: false,
+        staleTime: Infinity,
+        enabled: !!productId,
+      }
+    );
+  const { data: variantData, isInitialLoading: variantsIsInitiallyLoading } =
+    api.variants.getVariantByOptions.useQuery(
+      {
+        productId: productId as string,
+        options,
+      },
+      {
+        refetchOnMount: false,
+        refetchOnReconnect: false,
+        refetchOnWindowFocus: false,
+        staleTime: Infinity,
+        enabled:
+          !!productId && options.every(({ value }) => !value.includes(", ")),
+      }
+    );
 
   useEffect(() => {
     if (optionsData)
@@ -89,12 +83,7 @@ const VariantsCard = () => {
   return (
     <div className="relative w-full">
       <Loading
-        isOpen={
-          optionsDataIsLoading ||
-          optionsDataisFetching ||
-          variantIsLoading ||
-          variantIsFetching
-        }
+        isOpen={optionsDataIsInitaillyLoading || variantsIsInitiallyLoading}
       />
       <div className="relative flex flex-col gap-5">
         <CardWrapper
@@ -156,6 +145,14 @@ const VariantsCard = () => {
             label="Barcode"
             placeholder="Name"
             description="Enter the product barcode number."
+          />
+          <FormTextArea
+            rows={13}
+            className="border"
+            name="Variant.description"
+            label="Description"
+            placeholder="Name"
+            description="Set a description to the variant for better visibility."
           />
 
           <div className="flex w-full flex-col gap-1">
